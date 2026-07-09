@@ -100,6 +100,47 @@ header {
     color: var(--accent-color);
 }
 
+/* حاوية الزر لتوسيطه وإعطائه مسافة مريحة من الأعلى */
+.motivation-btn-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 15px; /* مسافة تفصله عن الجملة التشجيعية */
+}
+
+/* تصميم زر حوّل الآن بهوية قنديل */
+.btn-transfer-now {
+    background-color: var(--primary-color); /* اللون الأخضر الرسمي */
+    color: var(--white) !important;
+    padding: 10px 35px; /* حجم متناسق ورشيق */
+    border-radius: 50px; /* زوايا دائرية ناعمة */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(42, 86, 71, 0.15);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* تأثيرات حركة ذكية عند تمرير الماوس */
+.btn-transfer-now:hover {
+    background-color: var(--accent-color); /* يتحول للذهبي عند التمرير */
+    color: var(--white) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(210, 179, 114, 0.25);
+}
+
+/* ضبط متجاوب وخاص بشاشات الجوال والآيفون لكي يحافظ على فخامته */
+@media (max-width: 440px) {
+    .btn-transfer-now {
+        font-size: 0.88rem !important;
+        padding: 8px 30px !important;
+        width: 80% !important; /* يأخذ مساحة مناسبة ومريحة للضغط بالإصبع على الجوال */
+    }
+}
+
 /* أيقونة المنزل */
 .home-icon {
     font-size: 1.3rem;
