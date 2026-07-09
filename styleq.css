@@ -622,8 +622,8 @@ footer {
    ======================================================= */
 @media (max-width: 440px) {
     .hero-section {
-        padding-top: 10px !important; /* مسافة أمان مضافة بالتزامن مع البادنج الإجمالي للـ body */
-        padding-bottom: 25px;
+        padding-top: 20px !important; /* مسافة أمان مضافة بالتزامن مع البادنج الإجمالي للـ body */
+        padding-bottom: 30px;
     }
 
     .hero-container {
@@ -640,7 +640,7 @@ footer {
 
 @media (max-width: 440px) {
     body {
-        padding-top: 105px !important; /* مسافة تعويضية مطورة ومحكمة للآيفون لحماية الهيدر الممتد */
+        padding-top: 195px !important; /* مسافة تعويضية مطورة ومحكمة للآيفون لحماية الهيدر الممتد */
     }
 
     /* ضمان ثبات الهيدر العمودي في الجوال */
