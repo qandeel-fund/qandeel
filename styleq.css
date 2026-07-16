@@ -366,6 +366,15 @@ header {
     object-position: bottom center !important;
 }
 
+/* كود خاص بتكبير صورة سارة وتنسيقها داخل الدائرة */
+#sara-img {
+    width: 120% !important;        /* تكبير العرض بنسبة 120% لتملأ الدائرة وتكبر */
+    height: 120% !important;       /* تكبير الارتفاع بنفس النسبة للحفاظ على الأبعاد */
+    object-fit: cover !important;   /* يمنع تمطيط الصورة ويجعلها تغطي المساحة بجمالية */
+    object-position: center bottom !important; /* يحاذي الصورة لأسفل الدائرة مباشرة */
+    transform: translateY(3px) !important;     /* زحلقة خفيفة جداً لأسفل لضبط النزول بالملي */
+}
+
 .progress-bar-fill {
     background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
     height: 100%;
