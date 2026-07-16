@@ -1,3 +1,12 @@
+/* كود خاص بتكبير صورة سارة وتنسيقها داخل الدائرة */
+#sarah {
+    width: 120% !important;        /* تكبير العرض بنسبة 120% لتملأ الدائرة وتكبر */
+    height: 120% !important;       /* تكبير الارتفاع بنفس النسبة للحفاظ على الأبعاد */
+    object-fit: cover !important;   /* يمنع تمطيط الصورة ويجعلها تغطي المساحة بجمالية */
+    object-position: center bottom !important; /* يحاذي الصورة لأسفل الدائرة مباشرة */
+    transform: translateY(3px) !important;     /* زحلقة خفيفة جداً لأسفل لضبط النزول بالملي */
+}
+
 /* =======================================================
    1. إعدادات المتغيرات والألوان بناءً على هوية قنديل
    ======================================================= */
@@ -364,15 +373,6 @@ header {
 .winner-img-rowad {
     transform: translateY(7px) !important;
     object-position: bottom center !important;
-}
-
-/* كود خاص بتكبير صورة سارة وتنسيقها داخل الدائرة */
-#sarah {
-    width: 120% !important;        /* تكبير العرض بنسبة 120% لتملأ الدائرة وتكبر */
-    height: 120% !important;       /* تكبير الارتفاع بنفس النسبة للحفاظ على الأبعاد */
-    object-fit: cover !important;   /* يمنع تمطيط الصورة ويجعلها تغطي المساحة بجمالية */
-    object-position: center bottom !important; /* يحاذي الصورة لأسفل الدائرة مباشرة */
-    transform: translateY(3px) !important;     /* زحلقة خفيفة جداً لأسفل لضبط النزول بالملي */
 }
 
 .progress-bar-fill {
