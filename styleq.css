@@ -765,16 +765,3 @@ footer {
     }
 }
 
-/* انزلي لآخر الملف، وتأكدي أنه مكتوب داخل قوس الميديا كويري المفتوح للجوال هكذا */
-@media (max-width: 440px) {
-    
-    /* ... الأكواد السابقة للجوال ... */
-
-    #sarah {
-        width: 135% !important;        /* رفعنا النسبة قليلاً لتلاحظي الفرق بوضوح */
-        height: 135% !important;
-        object-fit: cover !important;
-        object-position: center bottom !important;
-        transform: translateY(6px) !important; /* زحلقة لأسفل الدائرة الذهبية */
-    }
-}
