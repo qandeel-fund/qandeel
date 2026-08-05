@@ -805,19 +805,25 @@ footer {
 }
 
 .milestone-text-only {
-    text-align: center !important; /* توسيط كامل للنص */
+    text-align: center !important; /* توسيط النص أفقياً */
     margin: 18px auto 12px !important;
     padding: 0 10px !important;
     width: 100% !important;
+    
+    /* ضمان التوسيط باستخدام Flexbox */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 /* السطر الأول: ذهبي وأكبر قليلاً */
 .milestone-title {
-    color: var(--accent-color) !important; /* اللون الذهبي الفخم الخاص بهوية قنديل */
-    font-size: 1.15rem !important;          /* حجم أكبر بارز للعين */
+    color: var(--accent-color) !important;
+    font-size: 1.15rem !important;
     font-weight: 800 !important;
     margin-bottom: 6px !important;
     line-height: 1.4 !important;
+    text-align: center !important; /* تأكيد التوسيط للعنوان */
+    width: 100% !important;
 }
-
-
