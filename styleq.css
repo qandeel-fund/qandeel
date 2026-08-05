@@ -390,6 +390,8 @@ header {
     direction: rtl;
 }
 
+
+
 .color-box {
     width: 16px;
     height: 16px;
@@ -807,6 +809,15 @@ footer {
     margin: 18px auto 12px !important;
     padding: 0 10px !important;
     width: 100% !important;
+}
+
+/* السطر الأول: ذهبي وأكبر قليلاً */
+.milestone-title {
+    color: var(--accent-color) !important; /* اللون الذهبي الفخم الخاص بهوية قنديل */
+    font-size: 1.15rem !important;          /* حجم أكبر بارز للعين */
+    font-weight: 800 !important;
+    margin-bottom: 6px !important;
+    line-height: 1.4 !important;
 }
 
 
