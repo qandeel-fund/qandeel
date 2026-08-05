@@ -802,3 +802,11 @@ footer {
     clear: both !important;
 }
 
+.milestone-text-only {
+    text-align: center !important; /* توسيط كامل للنص */
+    margin: 18px auto 12px !important;
+    padding: 0 10px !important;
+    width: 100% !important;
+}
+
+
