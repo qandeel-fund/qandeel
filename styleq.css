@@ -829,48 +829,45 @@ footer {
 }
 
 
-/* تنسيق الحاوية الرئيسية */
-.progress-container-box {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+/* تنسيق شريط المعلومات المتجاوب للشاشات والجوال */
+.progress-info-top {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important; /* يمنع انكسار السطر كلياً */
+    gap: 8px !important;
+    width: 100% !important;
+    margin-bottom: 8px !important;
 }
 
-/* السطر العلوي: توزيع الحالي والهدف على الأطراف */
-.progress-info-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.95rem;
-    font-weight: bold;
+/* تصغير وتضبيط المبلغ الحالي */
+.progress-info-top span:first-child {
+    font-size: 0.85rem !important; /* حجم متناسق للشاشات الصغيرة */
+    white-space: nowrap !important; /* يمنع نزول ر.س للسطر الثاني */
+    font-weight: 700 !important;
 }
-/* النص الذهبي بدون خلفية أو مربع */
+
+/* تصغير وتضبيط الهدف باللون الذهبي */
 .progress-info-top .goal-text,
 .goal-text {
+    font-size: 0.95rem !important; /* تصغير حجم الهدف ليتناسب مع الجوال */
+    white-space: nowrap !important; /* يمنع نزول ر.س للسطر الثاني */
     color: #c5a059 !important;
-    font-size: 1.25rem !important;
     font-weight: 800 !important;
-    background: transparent !important; /* إزالة خلفية المربع */
-    background-color: transparent !important;
-    padding: 0 !important; /* إزالة المسافات الداخلية */
-    border-radius: 0 !important;
 }
 
-.progress-info-top .goal-text strong,
-.goal-text strong {
-    color: #b38b3f !important;
+/* منع انكسار العملة عن الرقم */
+.progress-info-top strong {
+    white-space: nowrap !important;
 }
 
-/* السطر السفلي: وضع المتبقي تحت العداد بالوسط */
-.progress-info-bottom {
-    text-align: center;
-    font-size: 0.95rem;
-    color: var(--primary-color, #1b4332);
-    margin-top: 4px;
-}
-
-#remaining-amount {
-    color: #c5a059;
-    font-weight: 800;
-    font-size: 1.1rem;
+/* استجابة خاصة لشاشات الجوال الصغيرة جداً */
+@media (max-width: 480px) {
+    .progress-info-top span:first-child {
+        font-size: 0.78rem !important;
+    }
+    .progress-info-top .goal-text,
+    .goal-text {
+        font-size: 0.88rem !important;
+    }
 }
