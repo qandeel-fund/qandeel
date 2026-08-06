@@ -72,19 +72,32 @@
                     <img src="حصالةقنديل.png" alt="حصالة قنديل الكبيرة" class="money-box-large-img">
                 </div>
                 <!-- عداد الحصالة أسفل الصورة -->
+                <!-- عداد الحصالة أسفل الصورة -->
                 <div class="progress-container-box">
-                    <div class="progress-info">
-                        <span>المبلغ الحالي: <strong id="current-amount">7330</strong> ر.س</span>
-                        <span>الهدف: <strong>10000</strong> ر.س</span>
-                    </div>
+    <!-- السطر العلوي: المبلغ الحالي والهدف -->
+    <div class="progress-info-top">
+        <span>المبلغ الحالي: <strong id="current-amount">7630</strong> ر.س</span>
+        <span class="goal-text">الهدف: <strong id="goal-amount">10000</strong> ر.س</span>
+    </div>
+
+    <!-- شريط التقدم في المنتصف (ضعي كود العداد الخاص بكِ هنا) -->
+    <div class="progress-bar-container">
+        <!-- كود الـ progress bar الحالي -->
+    </div>
+
+    <!-- السطر السفلي: المبلغ المتبقي أسفل العداد -->
+    <div class="progress-info-bottom">
+        <span>المبلـغ المتبقي : <strong id="remaining-amount">0</strong> ر.س</span>
+    </div>
+</div>
 
                     <div class="progress-bar-bg">
-                        <div id="progress-fill" class="progress-bar-fill" style="width: 73.30%;"></div>
+                        <div id="progress-fill" class="progress-bar-fill" style="width: 76.30%;"></div>
                     </div>
 
                     <div class="families-legend">
                         <div class="legend-item">
-                            <span class="color-box" style="background-color: #D2B372;"></span> <span class="family-name">آل وصـل (2980 ر.س)</span>
+                            <span class="color-box" style="background-color: #D2B372;"></span> <span class="family-name">آل وصـل (3280 ر.س)</span>
                         </div>
                         <div class="legend-item">
                             <span class="color-box" style="background-color: #2A5647;"></span> <span class="family-name">آل عيـد (2340 ر.س)</span>
@@ -180,7 +193,19 @@
         </div>
     </div>
 </footer>
+    
+<script>
 
+document.addEventListener("DOMContentLoaded", function() {
+    const current = parseFloat(document.getElementById("current-amount").innerText) || 0;
+    const goal = parseFloat(document.getElementById("goal-amount").innerText) || 0;
+
+    let remaining = goal - current;
+    if (remaining < 0) remaining = 0;
+
+    document.getElementById("remaining-amount").innerText = remaining;
+});
+</script>
 <!-- استدعاء ملف الجافا سكريبت للعدادات وشريط التقدم فقط -->
 <script type="text/javascript" src="./script.js?v=1.2"></script>
 
