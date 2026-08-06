@@ -827,3 +827,50 @@ footer {
     text-align: center !important; /* تأكيد التوسيط للعنوان */
     width: 100% !important;
 }
+
+
+/* تنسيق الحاوية الرئيسية */
+.progress-container-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* السطر العلوي: توزيع الحالي والهدف على الأطراف */
+.progress-info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+/* النص الذهبي بدون خلفية أو مربع */
+.progress-info-top .goal-text,
+.goal-text {
+    color: #c5a059 !important;
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+    background: transparent !important; /* إزالة خلفية المربع */
+    background-color: transparent !important;
+    padding: 0 !important; /* إزالة المسافات الداخلية */
+    border-radius: 0 !important;
+}
+
+.progress-info-top .goal-text strong,
+.goal-text strong {
+    color: #b38b3f !important;
+}
+
+/* السطر السفلي: وضع المتبقي تحت العداد بالوسط */
+.progress-info-bottom {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--primary-color, #1b4332);
+    margin-top: 4px;
+}
+
+#remaining-amount {
+    color: #c5a059;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
