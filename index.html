@@ -11,6 +11,8 @@
     <!-- مكتبة الأيقونات Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styleq.css">
+    <!-- مكتبة قصاصات الاحتفال الخفيفة -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 <header>
@@ -196,14 +198,58 @@
 <script>
 
 document.addEventListener("DOMContentLoaded", function() {
-    const current = parseFloat(document.getElementById("current-amount").innerText) || 0;
-    const goal = parseFloat(document.getElementById("goal-amount").innerText) || 0;
-
+    // 1. حساب المبلغ المتبقي تلقائياً
+    const current = parseFloat(document.getElementById("current-amount")?.innerText) || 0;
+    const goal = parseFloat(document.getElementById("goal-amount")?.innerText) || 0;
+    
     let remaining = goal - current;
     if (remaining < 0) remaining = 0;
+    
+    const remainingEl = document.getElementById("remaining-amount");
+    if (remainingEl) remainingEl.innerText = remaining;
 
-    document.getElementById("remaining-amount").innerText = remaining;
+    // 2. إذا اكتمل المبلغ (المتبقي 0)، يتم تشغيل الاحتفال عند التمرير للخانة
+    if (remaining === 0) {
+        const targetSection = document.querySelector(".progress-container-box");
+
+        if (targetSection) {
+            let hasCelebrated = false; // لمنع تكرار الاحتفال في كل سحب
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasCelebrated) {
+                        hasCelebrated = true; // يتم إطلاقه مرة واحدة فقط عند الرؤية
+                        launchCelebration();
+                    }
+                });
+            }, { threshold: 0.5 }); // يعمل عند ظهور نصف الخانة على الشاشة
+
+            observer.observe(targetSection);
+        }
+    }
+
+    // دالة إطلاق قصاصات الاحتفال بألوان الهوية (ذهبي وزيتي)
+    function launchCelebration() {
+        var count = 200;
+        var defaults = {
+            origin: { y: 0.7 },
+            colors: ['#c5a059', '#b38b3f', '#2D4A3E', '#ffffff'] // الذهبي والزيتي والأبيض
+        };
+
+        function fire(particleRatio, opts) {
+            confetti(Object.assign({}, defaults, opts, {
+                particleCount: Math.floor(count * particleRatio)
+            }));
+        }
+
+        fire(0.25, { spread: 26, startVelocity: 55 });
+        fire(0.2,  { spread: 60 });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        fire(0.1,  { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+        fire(0.1,  { spread: 120, startVelocity: 45 });
+    }
 });
+
 </script>
 <!-- استدعاء ملف الجافا سكريبت للعدادات وشريط التقدم فقط -->
 <script type="text/javascript" src="./script.js?v=1.2"></script>
