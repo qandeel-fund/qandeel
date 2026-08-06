@@ -828,46 +828,79 @@ footer {
     width: 100% !important;
 }
 
+/* === التنسيق الشامل والمعدل للعداد === */
 
-/* تنسيق شريط المعلومات المتجاوب للشاشات والجوال */
+/* الحاوية الرئيسية */
+.progress-container-box {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+}
+
+/* 1. السطر العلوي (المبلغ الحالي والهدف) */
 .progress-info-top {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    flex-wrap: nowrap !important; /* يمنع انكسار السطر كلياً */
-    gap: 8px !important;
+    flex-wrap: nowrap !important;
     width: 100% !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 2px !important;
 }
 
-/* تصغير وتضبيط المبلغ الحالي */
-.progress-info-top span:first-child {
-    font-size: 0.85rem !important; /* حجم متناسق للشاشات الصغيرة */
-    white-space: nowrap !important; /* يمنع نزول ر.س للسطر الثاني */
+/* المبلغ الحالي باللون الزيتي وبدون انكسار للسطر */
+.progress-info-top span:first-child,
+.progress-info-top span:first-child strong {
+    color: #2D4A3E !important;
+    font-size: 0.82rem !important;
+    white-space: nowrap !important;
     font-weight: 700 !important;
 }
 
-/* تصغير وتضبيط الهدف باللون الذهبي */
+/* الهدف باللون الذهبي بدون مربع خلفية */
 .progress-info-top .goal-text,
 .goal-text {
-    font-size: 0.95rem !important; /* تصغير حجم الهدف ليتناسب مع الجوال */
-    white-space: nowrap !important; /* يمنع نزول ر.س للسطر الثاني */
+    font-size: 0.88rem !important;
+    white-space: nowrap !important;
     color: #c5a059 !important;
+    font-weight: 800 !important;
+    background: none !important;
+    padding: 0 !important;
+}
+
+.progress-info-top .goal-text strong,
+.goal-text strong {
+    color: #b38b3f !important;
+}
+
+/* 2. السطر السفلي (المبلغ المتبقي بالوسط تحت العداد) */
+.progress-info-bottom {
+    text-align: center !important;
+    width: 100% !important;
+    margin-top: 6px !important;
+    font-size: 0.85rem !important;
+    white-space: nowrap !important;
+    color: #2D4A3E !important; /* النص زيتي */
+    font-weight: 700 !important;
+}
+
+/* الرقم والعملة للمتبقي باللون الذهبي */
+#remaining-amount,
+.progress-info-bottom strong {
+    color: #C5A059 !important;
     font-weight: 800 !important;
 }
 
-/* منع انكسار العملة عن الرقم */
-.progress-info-top strong {
-    white-space: nowrap !important;
-}
-
-/* استجابة خاصة لشاشات الجوال الصغيرة جداً */
+/* استجابة خاصة لشاشات الجوال */
 @media (max-width: 480px) {
     .progress-info-top span:first-child {
         font-size: 0.78rem !important;
     }
     .progress-info-top .goal-text,
     .goal-text {
-        font-size: 0.88rem !important;
+        font-size: 0.85rem !important;
+    }
+    .progress-info-bottom {
+        font-size: 0.80rem !important;
     }
 }
