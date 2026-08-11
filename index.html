@@ -3,28 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قنديل</title>
-    <!-- استدعاء خط Cairo المعتمد -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <!-- مكتبة الأيقونات Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styleq.css">
-    <!-- مكتبة قصاصات الاحتفال الخفيفة -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <title>جريدة قنديل</title>
+
+    <!-- 1. أكواد الـ CSS (الستايل) -->
+    <style>
+        /* =======================================================
+           تنسيقات قسم جريدة قنديل والنافذة الانبثاقية
+           ======================================================= */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+         /* =======================================================
+   إصلاح مسافة الهيدر + عرض بطاقتين بجانب بعضهما (Grid 2-Columns)
+   ======================================================= */
+
+/* 1. ضبط مسافة الهيدر لتطابق الصفحة الرئيسية */
+/* ضبط المسافة العلوية لجميع الشاشات والجوالات */
+body {
+    font-family: 'Cairo', sans-serif !important;
+    background-color: #f9fbf9;
+    margin: 0;
+    padding: 0;
+    padding-top: 195px !important; /* مسافة كافية لمنع اختفاء العنوان خلف الهيدر */
+    direction: rtl;
+}
+
+/* ضبط المسافة المخصصة للجوال والآيفون */
+@media (max-width: 440px) {
+    body {
+        padding-top: 180px !important; /* زيادة المسافة للجوال حتى يظهر العنوان كاملاً */
+    }
+}
+
+.qandil-newspaper-section {
+    padding: 10px 5px;
+}
+
+/* 2. جعل شبكة العرض تتكون من عمودين دائماً */
+.newspaper-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* عمودين بصف واحد */
+    gap: 12px; /* تقليل المسافة بين البطاقات لتناسب الجوال */
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 3. تصغير أحجام عناصر البطاقات للتناسق */
+.newspaper-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #eef2f0;
+    display: flex;
+    flex-direction: column;
+}
+
+.issue-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #D2B372;
+    color: #4A3A10;
+    font-weight: 800;
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    z-index: 2;
+}
+
+.newspaper-cover {
+    position: relative;
+    height: 160px; /* تقليل ارتفاع الغلاف */
+    background: #f4f6f5;
+    overflow: hidden;
+}
+
+.newspaper-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.newspaper-info {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.issue-date {
+    font-size: 0.7rem;
+    color: #72B192;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.issue-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #2A5647;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.issue-snippet {
+    font-size: 0.75rem;
+    color: #666;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* اقتصاص النص الزائد لتبقى البطاقات بنفس الارتفاع */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.newspaper-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.action-link {
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 700;
+    padding: 6px 8px;
+    font-size: 0.75rem;
+}
+
+.action-link.main {
+    background: #2A5647;
+    color: #ffffff;
+    flex-grow: 1;
+}
+
+.action-link.icon-only {
+    background: #f0f4f2;
+    color: #2A5647;
+    border: 1px solid #d8e3de;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+}
+
+        /* تنسيق النافذة الانبثاقية (Modal) */
+        .flipbook-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .flipbook-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 90%;
+            max-width: 1000px;
+            height: 85vh;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            background: #2A5647;
+            color: #ffffff;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-body {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            background: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
 <header>
     <div class="container navbar">
-        <!-- الشعار في الأعلى ليكون بالوسط تماماً -->
         <div class="nav-logo-row">
             <a href="index.html#hero">
                 <img src="شفاف%20%20قنديل.png" alt="شعار مصياف قنديل" class="nav-logo">
             </a>
         </div>
 
-        <!-- روابط التنقل تحت الشعار مباشرة -->
         <div class="nav-links-row">
             <nav>
                 <ul class="nav-links">
@@ -36,364 +239,119 @@
             </nav>
         </div>
 
-        <!-- 3. زر كن مضيئاً بحجم صغير وملموم في الأسفل -->
         <div class="nav-bottom-row">
-            <a href="IBAN.html" class="nav-support-btn">
+            <a href="IBAN.html" target="_blank" class="nav-support-btn">
                 كُـــن مــضــيـئًـا <i class="fa-solid fa-hand-holding-heart"></i>
             </a>
         </div>
-
     </div>
 </header>
-<section class="hero-section" id="hero">
-    <div class="container hero-container">
 
-        <h1 class="welcome-title"> <span class="brand-name"></span></h1>
+    <!-- أجزاء الـ HTML -->
+    <section class="qandil-newspaper-section">
+        <h1 class="newspaper-main-title" style="color: #2A5647; font-weight: 800;">
+    📰 جريدة قنديل
+</h1>
+<p class="newspaper-sub-title" style="color: #D2B372; font-weight: 700;">
+    أخبار سعيدة، إنجازات، ولحظات لا تُنسى لـ آل قنديل
+</p>
 
-        <div class="hero-intro-content">
-            <h2 class="hero-main-text">مـع "مصيـاف قنـديل" نتعـلم ونؤمـن ونُـزهِـر</h2>
-            <p class="hero-sub-text">أكثـر مـن برنـامج .. حـصص قرآنيـة ، دروس إيمانيـة ، آداب وأخـلاق ، مهـارات وترفيـه</p>
-            <p class="hero-vision-text">نسعدُ بكم وبأطفالكم ،
-لِنكملَ الحكاية بلونٍ جديد وعزمٍ أكيد🌱</p>
-        </div>
+        <div class="newspaper-grid">
 
-    </div>
-</section>
-
-    <!-- لوحة التفاعل الرئيسية (المقسمة لعمودين يمين ويسار) -->
-    <section id="main-dashboard" class="dashboard-section">
-        <div class="container dashboard-grid">
-
-            <!-- العمود الأيمن: الحصالة ممتدة بالطول -->
-            <div class="right-column-box">
-                <div class="section-title-box">
-                    <h2><i class="fa-solid fa-piggy-bank"></i> حصالة مصياف قنديل</h2>
-                    <p>لنُحـقـق الهدف معًـا خطوةٍ بِخطوة</p>
+            <!-- الإصدار الثاني (new2.pdf) -->
+            <div class="newspaper-card">
+                <div class="issue-badge">أحدث إصدار 🔥</div>
+                <div class="newspaper-cover">
+                    <img src="غلاف.png" alt="غلاف الإصدار الثاني">
+                    <div class="cover-overlay">
+                        <button class="view-btn" onclick="openFlipbook('new2.pdf', 'الإصدار الثاني')">
+                            تصفح الجريدة 📖
+                        </button>
+                    </div>
                 </div>
-                <!-- صورة الحصالة الكبيرة -->
-                <div class="money-box-img-container">
-                    <img src="حصالةقنديل.png" alt="حصالة قنديل الكبيرة" class="money-box-large-img">
-                </div>
-                <!-- عداد الحصالة أسفل الصورة -->
-                <!-- عداد الحصالة أسفل الصورة -->
-                <div class="progress-container-box">
-                <div class="progress-info-top">
-                    <span>المبلغ الحالي: <strong id="current-amount">0</strong> ر.س</span>
-                    <span class="goal-text">الهدف: <strong id="goal-amount">10000</strong> ر.س</span>
-                </div>
-
-                <div class="progress-bar-bg">
-                    <div id="progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
-                </div>
-
-                <div class="progress-info-bottom">
-                    <span>المبلـغ المتبقي : <strong id="remaining-amount">0</strong> ر.س</span>
-                </div>
-
-
-            </div>
-
-            <div class="families-legend">
-                <div class="legend-item">
-                    <span class="color-box" style="background-color: #D2B372;"></span> <span class="family-name">آل وصـل (0 ر.س)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="color-box" style="background-color: #72B192;"></span> <span class="family-name">آل مثـل (0 ر.س)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="color-box" style="background-color: #E6CE9A;"></span> <span class="family-name">آل مريـط (0 ر.س)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="color-box" style="background-color: #2A5647;"></span> <span class="family-name">آل عيـد (0 ر.س)</span>
+                <div class="newspaper-info">
+                    <span class="issue-date">🗓️ الإصدار الثاني</span>
+                    <h3 class="issue-title">حصاد العائلة وأفراحهـا</h3>
+                    <p class="issue-snippet">نجاحات العائلة، وإعلان الفائزين لمصياف قنديل ..</p>
+                    <div class="newspaper-actions">
+                        <button class="action-link main" onclick="openFlipbook('new2.pdf', 'الإصدار الثاني')">
+                            قراءة الإصدار 📖
+                        </button>
+                        <a href="new2.pdf" download class="action-link icon-only" title="تحميل PDF">📥</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="milestone-text-only">
-                <h6 class="milestone-title">
-                    <p>️بدعمـكم تُضيء شعلة قنديلنـا🕯️</p>
-                </h6>
-            </div>
-
-            <div class="motivation-btn-row">
-                <a href="IBAN.html" class="btn-transfer-now">حــوّل الأن</a>
-            </div>
-        </div> <!-- إغلاق العمود الأيمن بشكل صحيح هنا -->
-
-        <!-- العمود الأيسر: قسم أبطال مصياف قنديل (تصميم منصة التتويج) -->
-<div class="left-column-box champions-section">
-    <h2 class="section-title">أبطال مصياف قنديل 🏆</h2>
-
-    <div class="categories-wrapper">
-
-        <!-- 1. فئة البراعم -->
-        <div class="category-column">
-            <h3 class="category-header">فئـة البـراعـم </h3>
-
-            <div class="podium-container">
-                <!-- المركز الثاني (يمين) -->
-                <div class="podium-step step-2">
-                    <div class="podium-avatar-wrapper">
-                        <img src="شيخه%20معجب.jpeg" class="podium-avatar" alt="شيخـة معجـب">
-                        <span class="podium-badge">2</span>
+            <!-- الإصدار الأول (new1.pdf) -->
+            <div class="newspaper-card">
+                <div class="newspaper-cover">
+                    <img src="غلاف.png" alt="غلاف الإصدار الأول">
+                    <div class="cover-overlay">
+                        <button class="view-btn" onclick="openFlipbook('new1.pdf', 'الإصدار الأول')">
+                            تصفح الجريدة 📖
+                        </button>
                     </div>
-                    <span class="podium-name">شيخـة معجـب</span>
-                    <div class="podium-block">2</div>
                 </div>
-
-                <!-- المركز الأول (المنتصف) -->
-                <div class="podium-step step-1">
-                    <div class="podium-avatar-wrapper">
-                        <img src="شيهانه.png" class="podium-avatar" alt="شيهـانه محمـد">
-                        <span class="podium-badge">1</span>
+                <div class="newspaper-info">
+                    <span class="issue-date">🗓️ الإصدار الأول</span>
+                    <h3 class="issue-title">انطلاقة جريدة قنـديل الأولى</h3>
+                    <p class="issue-snippet">الإصدار الافتتاحي الخاص بأخبار وأفراح آل قنديل ..</p>
+                    <div class="newspaper-actions">
+                        <button class="action-link main" onclick="openFlipbook('new1.pdf', 'الإصدار الأول')">
+                            قراءة الإصدار 📖
+                        </button>
+                        <a href="new1.pdf" download class="action-link icon-only" title="تحميل PDF">📥</a>
                     </div>
-                    <span class="podium-name">شيهـانه محمـد</span>
-                    <div class="podium-block">1</div>
-                </div>
-
-                <!-- المركز الثالث (يسار) -->
-                <div class="podium-step step-3">
-                    <div class="podium-avatar-wrapper">
-                        <img src="فهاد.png" class="podium-avatar" alt="فهـاد إبراهيـم">
-                        <span class="podium-badge">3</span>
-                    </div>
-                    <span class="podium-name">فهـاد إبراهيـم</span>
-                    <div class="podium-block">3</div>
                 </div>
             </div>
-        </div>
 
-        <!-- 2. فئة النجوم (تتضمن مركز أول مكرر) -->
-        <div class="category-column">
-            <h3 class="category-header">فئـة النجـوم </h3>
-
-            <div class="podium-container">
-                <!-- المركز الثاني -->
-                <div class="podium-step step-2">
-                    <div class="podium-avatar-wrapper">
-                        <img src="زياد%20.jpeg" class="podium-avatar" alt="سـارة سلطـان">
-                        <span class="podium-badge">2</span>
-                    </div>
-                    <span class="podium-name">زيـاد محمد</span>
-                    <div class="podium-block">2</div>
-                </div>
-
-                <!-- المركز الأول المكرر (غالب وزياد) -->
-                <div class="podium-step step-1 step-tied">
-                    <div class="podium-avatar-wrapper tied-avatars">
-                        <img src="غالب%20ضيف%20الله%20غالب.jpeg" class="podium-avatar" alt="غالـب ضيـف الله">
-                        <img src="عبدالعزيز.jpeg" class="podium-avatar tied-second" alt="زيـاد محمـد">
-                        <span class="podium-badge">1</span>
-                    </div>
-                    <span class="podium-name">غالـب & عبدالعزيز</span>
-                    <div class="podium-block">1</div>
-                </div>
-
-                <!-- المركز الثالث -->
-                <div class="podium-step step-3">
-                    <div class="podium-avatar-wrapper">
-                        <img src="سلطان%20ساره.png" class="podium-avatar" alt="عبدالعزيـز محمـد">
-                        <span class="podium-badge">3</span>
-                    </div>
-                    <span class="podium-name">سـارة سلطـان</span>
-                    <div class="podium-block">3</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. فئة الزهور -->
-        <div class="category-column">
-            <h3 class="category-header">فئـة الزهـور </h3>
-
-            <div class="podium-container">
-                <!-- المركز الثاني -->
-                <div class="podium-step step-2">
-                    <div class="podium-avatar-wrapper">
-                        <img src="نوف.jpeg" class="podium-avatar" alt="نـوف محمد">
-                        <span class="podium-badge">2</span>
-                    </div>
-                    <span class="podium-name">نـوف محمد</span>
-                    <div class="podium-block">2</div>
-                </div>
-
-                <!-- المركز الأول -->
-                <div class="podium-step step-1">
-                    <div class="podium-avatar-wrapper">
-                        <img src="الجوري.jpeg" class="podium-avatar" alt="الجـوري عبدالله">
-                        <span class="podium-badge">1</span>
-                    </div>
-                    <span class="podium-name">الجـوري عبدالله</span>
-                    <div class="podium-block">1</div>
-                </div>
-
-                <!-- المركز الثالث -->
-                <div class="podium-step step-3">
-                    <div class="podium-avatar-wrapper">
-                        <img src="ديما.jpeg" class="podium-avatar" alt="ديمـا عبدالله">
-                        <span class="podium-badge">3</span>
-                    </div>
-                    <span class="podium-name">ديمـا عبدالله</span>
-                    <div class="podium-block">3</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. فئة الرواد (تتضمن مركز ثالث مكرر) -->
-        <div class="category-column">
-            <h3 class="category-header">فئـة الـرواد </h3>
-
-            <div class="podium-container">
-                <!-- المركز الثاني -->
-                <div class="podium-step step-2">
-                    <div class="podium-avatar-wrapper">
-                        <img src="girl-avatar.png" class="podium-avatar" alt="نـوف سعـد">
-                        <span class="podium-badge">2</span>
-                    </div>
-                    <span class="podium-name">نـوف سعـد</span>
-                    <div class="podium-block">2</div>
-                </div>
-
-                <!-- المركز الأول -->
-                <div class="podium-step step-1">
-                    <div class="podium-avatar-wrapper">
-                        <img src="girl-avatar.png" class="podium-avatar" alt="جـواهـر صاهـود">
-                        <span class="podium-badge">1</span>
-                    </div>
-                    <span class="podium-name">جـواهـر صاهـود</span>
-                    <div class="podium-block">1</div>
-                </div>
-
-                <!-- المركز الثالث المكرر (عايشه ووئام) -->
-                <div class="podium-step step-3 step-tied">
-                    <div class="podium-avatar-wrapper tied-avatars">
-                        <img src="girl-avatar.png" class="podium-avatar" alt="عايشـه عيـد">
-                        <img src="girl-avatar.png" class="podium-avatar tied-second" alt="وئـام سعـد">
-                        <span class="podium-badge">3</span>
-                    </div>
-                    <span class="podium-name">عايشـه & وئـام</span>
-                    <div class="podium-block">3</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div> <!-- إغلاق العمود الأيسر -->
         </div>
     </section>
 
-<!-- قسم قنديل في أرقام -->
-<section id="stats" class="stats-section">
-    <div class="container">
-        <div class="section-title">
-            <h2><i class="fa-solid fa-chart-line"></i> قنديل في أرقام</h2>
-            <p>حصاد جهود أبطالنا وبطلاتنا  منذ انطلاق قنـديـل</p>
-        </div>
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
-                <h3>أكثر من <span class="counter" data-target="1000">1000</span></h3>
-                <p>مشترك متميز</p>
+    <!-- النافذة الانبثاقية -->
+    <div id="flipbookModal" class="flipbook-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">تصفح الجريدة</h3>
+                <button class="close-modal" onclick="closeFlipbook()">&times;</button>
             </div>
-
-            <div class="stat-item">
-    <div class="stat-icon">
-        <!-- الصورة الجديدة مكان الأيقونة القديمة -->
-        <img src="ايقونة%20قران%20(2).png" alt="أيقونة القرآن" class="quran-custom-icon">
-    </div>
-    <h3>أكثر من <span class="counter" data-target="10">10</span></h3>
-    <p>أجـزاء محفـوظة</p>
-    </div>
-            <div class="stat-item">
-                <div class="stat-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
-                <h3>أكثر من <span class="counter" data-target="200">200</span></h3>
-                <p>مبادرة اجتماعية</p>
+            <div class="modal-body">
+                <!-- سيتم تحميل الـ PDF هنا تلقائياً -->
             </div>
         </div>
     </div>
-</section>
 
+    <!-- أكواد الجافاسكريبت JS -->
+    <script>
+function openFlipbook(pdfUrl, title) {
+    const modal = document.getElementById('flipbookModal');
+    const modalBody = document.querySelector('.modal-body');
+    const modalTitle = document.getElementById('modalTitle');
 
-    <!-- الفوتر -->
-<footer>
-    <div class="container footer-container">
-        <div class="footer-socials">
-            <a href="https://wa.me/966579517751" target="_blank" title="واتساب المبادرة" class="footer-icon-link">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
-            <a href="https://www.instagram.com/qandeel_fund" target="_blank" title="انستقرام المبادرة" class="footer-icon-link">
-             <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@qandeel_fund?_r=1&_t=ZS-97tT4upqG7I" target="_blank" title="تيك توك المبادرة" class="footer-icon-link">
-            <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://chat.whatsapp.com/KPNoigsbJTEI9pqOmeyUr5?mode=gi_t" target="_blank" title="القروب العام" class="footer-icon-link join-icon">
-                <i class="fa-solid fa-user-plus"></i> <span class="icon-text">انضم للقروب العام</span>
-            </a>
-        </div>
+    modalTitle.textContent = "جريدة قنديل - " + title;
 
-        <div class="footer-rights">
-            <p>جميع الحقوق محفوظة لقنـديل © 2026</p>
-        </div>
-    </div>
-</footer>
-    
-<script>
+    // استخدام اسم الملف المباشر ليعمل بسلاسة على GitHub Pages
+    modalBody.innerHTML = `<embed src="${pdfUrl}#toolbar=0&navpanes=0" type="application/pdf" width="100%" height="100%" />`;
 
-document.addEventListener("DOMContentLoaded", function() {
-    // 1. حساب المبلغ المتبقي تلقائياً
-    const current = parseFloat(document.getElementById("current-amount")?.innerText) || 0;
-    const goal = parseFloat(document.getElementById("goal-amount")?.innerText) || 0;
-    
-    let remaining = goal - current;
-    if (remaining < 0) remaining = 0;
-    
-    const remainingEl = document.getElementById("remaining-amount");
-    if (remainingEl) remainingEl.innerText = remaining;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
 
-    // 2. إذا اكتمل المبلغ (المتبقي 0)، يتم تشغيل الاحتفال عند التمرير للخانة
-    if (remaining === 0) {
-        const targetSection = document.querySelector(".progress-container-box");
+function closeFlipbook() {
+    const modal = document.getElementById('flipbookModal');
+    const modalBody = document.querySelector('.modal-body');
 
-        if (targetSection) {
-            let hasCelebrated = false; // لمنع تكرار الاحتفال في كل سحب
+    modal.classList.remove('active');
+    modalBody.innerHTML = '';
+    document.body.style.overflow = 'auto';
+}
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !hasCelebrated) {
-                        hasCelebrated = true; // يتم إطلاقه مرة واحدة فقط عند الرؤية
-                        launchCelebration();
-                    }
-                });
-            }, { threshold: 0.5 }); // يعمل عند ظهور نصف الخانة على الشاشة
-
-            observer.observe(targetSection);
-        }
+window.onclick = function(event) {
+    const modal = document.getElementById('flipbookModal');
+    if (event.target === modal) {
+        closeFlipbook();
     }
-
-    // دالة إطلاق قصاصات الاحتفال بألوان الهوية (ذهبي وزيتي)
-    function launchCelebration() {
-        var count = 200;
-        var defaults = {
-            origin: { y: 0.7 },
-            colors: ['#c5a059', '#b38b3f', '#2D4A3E', '#ffffff'] // الذهبي والزيتي والأبيض
-        };
-
-        function fire(particleRatio, opts) {
-            confetti(Object.assign({}, defaults, opts, {
-                particleCount: Math.floor(count * particleRatio)
-            }));
-        }
-
-        fire(0.25, { spread: 26, startVelocity: 55 });
-        fire(0.2,  { spread: 60 });
-        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-        fire(0.1,  { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-        fire(0.1,  { spread: 120, startVelocity: 45 });
-    }
-});
-
-</script>
-<!-- استدعاء ملف الجافا سكريبت للعدادات وشريط التقدم فقط -->
-<script type="text/javascript" src="./script.js?v=1.2"></script>
-
+}
+    </script>
 </body>
 </html>
