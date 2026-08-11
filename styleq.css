@@ -1197,10 +1197,14 @@ footer {
     height: 290px !important;
 }
 
-/* تكبير خط الأسماء وتحسين التنسيق */
 .podium-name {
-    font-size: 1rem !important;
-    font-weight: 800 !important;
-    margin-bottom: 8px !important;
-    max-width: 110px !important;
+    font-size: 0.78rem;        /* تصغير بسيط للخط لتناسب المساحة */
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 6px;
+    white-space: normal;       /* السماح للاسم بالنزول لسطر ثاني إن لزم الأمر */
+    word-break: break-word;    /* منع خروج الكلمات عن الحدود */
+    max-width: 100%;           /* الاستفادة من كامل عرض عمود المركز */
+    line-height: 1.2;          /* ضبط المسافة بين السطور عند الالتفاف */
 }
