@@ -904,3 +904,303 @@ footer {
         font-size: 0.80rem !important;
     }
 }
+
+======================================================
+   قسم أبطال مصياف قنديل - الفائزين بالبرنامج
+   ======================================================= */
+.champions-section {
+    padding: 35px 0;
+    background-color: var(--white);
+}
+/* =======================================================
+   تنسيق قسم الأبطال (بدون خلفية بيضاء كبرى وبحجم أكبر)
+   ======================================================= */
+/* =======================================================
+   تصميم منصة التتويج (Podium Layout)
+   ======================================================= */
+
+.champions-section,
+.left-column-box.champions-section {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 10px 0 !important;
+}
+
+.champions-section .categories-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+/* كارت الفئة */
+.category-column {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 24px 15px 15px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+}
+
+.category-header {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #2a5647;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* حاوية منصة التتويج */
+.podium-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 12px;
+    height: 250px;
+    padding-bottom: 10px;
+}
+
+/* عمود المركز الفردي */
+.podium-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+/* الصورة الشخصية فوق العمود */
+.podium-avatar-wrapper {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.podium-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.podium-badge {
+    position: absolute;
+    top: -8px;
+    right: -5px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 900;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.podium-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 85px;
+}
+
+/* أعمدة المنصة بأرتفاعات وألوان مختلفة */
+.podium-block {
+    width: 100%;
+    border-radius: 12px 12px 6px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* المركز الأول: الأطول في المنتصف */
+.step-1 { order: 2; }
+.step-1 .podium-avatar { width: 72px; height: 72px; border: 3px solid #d2b372; }
+.step-1 .podium-badge { background: #d2b372; }
+.step-1 .podium-block {
+    height: 110px;
+    background: linear-gradient(180deg, #72b192 0%, #2a5647 100%);
+}
+
+/* المركز الثاني: على اليمين (في الواجهة العربية) */
+.step-2 { order: 1; }
+.step-2 .podium-avatar { border: 3px solid #a0aec0; }
+.step-2 .podium-badge { background: #a0aec0; }
+.step-2 .podium-block {
+    height: 80px;
+    background: linear-gradient(180deg, #8abea5 0%, #477a67 100%);
+}
+
+/* المركز الثالث: على اليسار */
+.step-3 { order: 3; }
+.step-3 .podium-avatar { border: 3px solid #e6ce9a; }
+.step-3 .podium-badge { background: #e6ce9a; }
+.step-3 .podium-block {
+    height: 60px;
+    background: linear-gradient(180deg, #aed4c2 0%, #5d8f7c 100%);
+}
+
+@media (max-width: 768px) {
+    .champions-section .categories-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* دعم تداخل صور الفائزين المكررين */
+.tied-avatars {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 80px;
+}
+
+.tied-avatars .podium-avatar {
+    width: 48px !important;
+    height: 48px !important;
+}
+
+.tied-avatars .tied-second {
+    margin-right: -20px; /* تداخل احترافي بين الصورتين */
+}
+/* =======================================================
+   تنسيق ألوان المنصة: ذهبي - زيتي غامق - زيتي فاتح
+   ======================================================= */
+
+/* 🥇 المركز الأول: الذهبي الفاخر (المنتصف) */
+.step-1 .podium-avatar {
+    border: 3px solid #D2B372 !important;
+}
+.step-1 .podium-badge {
+    background: linear-gradient(135deg, #E6CE9A, #D2B372) !important;
+    color: #4A3A10 !important;
+}
+.step-1 .podium-block {
+    background: linear-gradient(180deg, #E6CE9A 0%, #D2B372 50%, #B8934A 100%) !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* 🥈 المركز الثاني: زيتي غامق (اليمين) */
+.step-2 .podium-avatar {
+    border: 3px solid #2A5647 !important;
+}
+.step-2 .podium-badge {
+    background: linear-gradient(135deg, #3B725E, #2A5647) !important;
+    color: #FFFFFF !important;
+}
+.step-2 .podium-block {
+    background: linear-gradient(180deg, #3B725E 0%, #2A5647 60%, #1D3D32 100%) !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* 🥉 المركز الثالث: زيتي فاتح (اليسار) */
+.step-3 .podium-avatar {
+    border: 3px solid #72B192 !important;
+}
+.step-3 .podium-badge {
+    background: linear-gradient(135deg, #93C7AD, #72B192) !important;
+    color: #1D3D32 !important;
+}
+.step-3 .podium-block {
+    background: linear-gradient(180deg, #93C7AD 0%, #72B192 60%, #569476 100%) !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* =======================================================
+   تكبير صور الأبطال والشارات فوق منصة التتويج
+   ======================================================= */
+
+/* تكبير حاوية الصورة لتعطي مجالاً أوسع */
+.podium-avatar-wrapper {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+/* 🥇 المركز الأول (المنتصف): صورة ضخمة وبارزة */
+.step-1 .podium-avatar {
+    width: 95px !important;
+    height: 95px !important;
+    border-width: 4px !important;
+    box-shadow: 0 6px 15px rgba(210, 179, 114, 0.4) !important;
+}
+
+.step-1 .podium-badge {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 1.1rem !important;
+    top: -6px !important;
+    right: -4px !important;
+}
+
+/* 🥈 المركز الثاني (اليمين): صورة كبيرة */
+.step-2 .podium-avatar {
+    width: 80px !important;
+    height: 80px !important;
+    border-width: 3.5px !important;
+    box-shadow: 0 5px 12px rgba(42, 86, 71, 0.3) !important;
+}
+
+.step-2 .podium-badge {
+    width: 27px !important;
+    height: 27px !important;
+    font-size: 1rem !important;
+    top: -5px !important;
+    right: -3px !important;
+}
+
+/* 🥉 المركز الثالث (اليسار): صورة كبيرة */
+.step-3 .podium-avatar {
+    width: 80px !important;
+    height: 80px !important;
+    border-width: 3.5px !important;
+    box-shadow: 0 5px 12px rgba(114, 177, 146, 0.3) !important;
+}
+
+.step-3 .podium-badge {
+    width: 27px !important;
+    height: 27px !important;
+    font-size: 1rem !important;
+    top: -5px !important;
+    right: -3px !important;
+}
+
+/* تكبير العرض في حالات المراكز المكررة (مثل غالب وزياد) */
+.tied-avatars {
+    width: 110px !important;
+}
+
+.tied-avatars .podium-avatar {
+    width: 65px !important;
+    height: 65px !important;
+}
+
+.tied-avatars .tied-second {
+    margin-right: -25px !important;
+}
+
+/* زيادة ارتفاع المنصة لتتناسب مع الصور الكبيرة */
+.podium-container {
+    height: 290px !important;
+}
+
+/* تكبير خط الأسماء وتحسين التنسيق */
+.podium-name {
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 8px !important;
+    max-width: 110px !important;
+}
