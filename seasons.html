@@ -454,40 +454,44 @@
             align-items: center;
         }
 
+       
         /* =======================================================
-   تنسيق ظهور صورة المشارك عند اللمسة الواحدة
+   تعديل حجم وإطار صورة المشارك البوب آب
    ======================================================= */
 .participants-tags-grid span .pop-img-box {
     position: absolute;
-    bottom: 120%;
+    bottom: 125%;
     left: 50%;
     transform: translateX(-50%) scale(0.6);
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
+    width: 65px;               /* عرض الدائرة */
+    height: 65px;              /* ارتفاع الدائرة */
+    border-radius: 50% !important; /* يجعل الحاوية دائرية */
     border: 3px solid var(--accent-color);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
     background-color: var(--white);
     z-index: 300;
+    overflow: hidden !important; /* يمنع بروز الصورة خارج الدائرة */
 }
 
-/* ظهور الصورة عند إضافة كلاس active بلمسة واحدة */
+/* ضبط الصورة نفسها داخل الحاوية الدائرية */
+.participants-tags-grid span .pop-img-box img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* يقص الصورة لتناسب الدائرة تماماً */
+    border-radius: 50% !important;
+    display: block;
+}
+
+/* إظهار الصورة عند اللمس */
 .participants-tags-grid span.active .pop-img-box {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) scale(1);
 }
-
-        .participants-tags-grid span:hover .pop-img-box,
-        .participants-tags-grid span:active .pop-img-box {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) scale(1);
-        }
 
         /* =======================================================
            6. قسم معرض الصور واللايكات (عدسة مصياف) - مربعات متراصفة
