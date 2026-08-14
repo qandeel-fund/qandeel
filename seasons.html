@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>منصة مواسم قنديل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet"  href="styleq.css">
+    <style>
+        /* =======================================================
+           1. المتغيرات والأساسيات
+           ======================================================= */
+        :root {
+            --primary-color: #2A5647;   /* الأخضر الداكن */
+            --accent-color: #D2B372;    /* الذهبي */
+            --light-bg: #f4f7f5;
+            --white: #ffffff;
+            --text-color: #333333;
+            --heart-red: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding: 20px 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        /* زر العودة للمواسم */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.2s ease;
+        }
+
+        .back-btn:active {
+            background: #1e3e33;
+        }
+
+        /* التحكم بظهور الصفحات */
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+       /* =======================================================
+   تنسيق قائمة المواسم (مربعات أطول وأوضح)
+   ======================================================= */
+.seasons-section {
+    background: var(--white, #ffffff);
+    padding: 20px 14px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+/* تقسيم الصف إلى عمودين متساويين */
+.seasons-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+}
+
+.season-card {
+    background: #ffffff !important;
+    border-radius: 18px;
+    padding: 24px 14px 18px 14px; /* زيادة التباعد الداخلي من الأعلى والأسفل */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    border: 1px solid rgba(42, 86, 71, 0.08);
+    border-top: 4px solid var(--accent-color, #D2B372);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-height: 220px; /* زيادة طول المربع ليصبح أطول وأوضح */
+}
+
+.season-card:active {
+    transform: scale(0.97);
+}
+
+.season-card.disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.season-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.season-icon {
+    width: 60px; /* تكبير الأيقونة قليلاً لتتناسب مع طول المربع */
+    height: 60px;
+    background: rgba(42, 86, 71, 0.08);
+    color: var(--primary-color, #2A5647);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.season-details h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--primary-color, #2A5647);
+    margin-bottom: 6px;
+}
+
+.season-details p {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.season-tag {
+    background: var(--primary-color, #2A5647);
+    color: #ffffff;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 12px;
+    width: fit-content;
+}
+
+.season-tag.coming-soon {
+    background: #888888;
+}
+
+        /* =======================================================
+           3. قسم الأهداف المنجزة
+           ======================================================= */
+        .goals-section {
+            background: var(--white);
+            padding: 20px 16px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .goals-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .goals-list li {
+            background: var(--light-bg);
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .goals-list li i {
+            color: var(--accent-color);
+        }
+
+   /* =======================================================
+   تنسيقات منصة التتويج (خلفية بيضاء ومعزولة عن التضارب)
+   ======================================================= */
+.champions-section {
+    background: var(--white, #ffffff);
+    padding: 20px 12px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    margin-bottom: 25px;
+    direction: rtl;
+}
+
+.champions-section .categories-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* التعديل هنا: تحويل خلفية البطاقة إلى اللون الأبيض */
+.champions-section .category-column {
+    background: #ffffff !important; /* خلفية بيضاء نقية */
+    border-radius: 16px;
+    padding: 15px 10px;
+    border: 1px solid rgba(42, 86, 71, 0.08); /* إطار خفيف لتمييز المربع الأبيض */
+    border-top: 3px solid var(--accent-color, #D2B372);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); /* ظل ناعم لإبراز المربع */
+}
+
+.champions-section .category-header {
+    text-align: center;
+    color: var(--primary-color, #2A5647);
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.champions-section .podium-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    gap: 8px;
+    min-height: 170px;
+    padding-bottom: 5px;
+}
+
+/* =======================================================
+   إصلاح قص الأسماء في منصة التتويج
+   ======================================================= */
+
+/* سماح للنص بالالتفاف بدون قص وزيادة العرض */
+.champions-section .podium-step {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    flex: 1;
+    min-width: 0; /* منع انضغاط المحتوى وقصه */
+    max-width: 120px; /* توسيع العرض قليلاً */
+}
+
+.champions-section .podium-name {
+    font-size: 0.72rem; /* تصغير الخط بنسبة بسيطة ليتسع للأسماء المركبة */
+    font-weight: 800;
+    color: var(--primary-color, #2A5647);
+    text-align: center;
+    margin-bottom: 5px;
+    line-height: 1.25;
+    min-height: 32px; /* اعطاء مساحة كافية لسطرين عند الحاجة */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* منع اقتصاص الكلمات */
+    white-space: normal !important; /* السماح بالتفاف النص */
+    word-break: keep-all; /* عدم قطع الكلمة الواحدة من المنتصف */
+    overflow: visible !important;
+    padding: 0 2px;
+    width: 100%;
+}
+
+.champions-section .podium-avatar-wrapper {
+    position: relative;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.champions-section .podium-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color, #D2B372);
+    background: #ffffff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.champions-section .tied-avatars {
+    display: flex;
+    align-items: center;
+}
+
+.champions-section .tied-avatars .tied-second {
+    margin-right: -18px;
+}
+
+.champions-section .podium-badge {
+    position: absolute;
+    bottom: -4px;
+    right: -2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ffffff;
+}
+
+.champions-section .step-1 .podium-badge { background-color: #d4af37; }
+.champions-section .step-2 .podium-badge { background-color: #a0a0a0; }
+.champions-section .step-3 .podium-badge { background-color: #b87333; }
+
+
+
+.champions-section .podium-block {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+.champions-section .step-1 .podium-block { height: 75px; background: linear-gradient(180deg, #D2B372 0%, #b39250 100%); }
+.champions-section .step-2 .podium-block { height: 55px; background: linear-gradient(180deg, #2A5647 0%, #1e3e33 100%); }
+.champions-section .step-3 .podium-block { height: 40px; background: linear-gradient(180deg, #4A7C6D 0%, #355a4e 100%); }
+        /* =======================================================
+           5. قسم المشاركين المنسدل (Accordion)
+           ======================================================= */
+        .accordion-section {
+            background: var(--white);
+            padding: 20px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .categories-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .category-item {
+            border: 1px solid rgba(42, 86, 71, 0.12);
+            border-radius: 14px;
+            background: var(--white);
+        }
+
+        .category-btn {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--light-bg);
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 14px;
+        }
+
+        .cat-btn-title {
+            color: var(--primary-color);
+            font-size: 0.88rem;
+            font-weight: 800;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .cat-supervisors {
+            font-size: 0.72rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .cat-icon {
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .category-item.active .cat-icon {
+            transform: rotate(180deg);
+        }
+
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 10px;
+        }
+
+        .category-item.active .category-content {
+            padding: 50px 10px 15px 10px;
+            max-height: 3000px;
+            overflow: visible;
+        }
+
+        .participants-tags-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .participants-tags-grid span {
+            position: relative;
+            background: rgba(42, 86, 71, 0.06);
+            color: var(--primary-color);
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border: 1px solid rgba(42, 86, 71, 0.1);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .participants-tags-grid span .pop-img-box {
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%) scale(0.6);
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            background-color: var(--white);
+            z-index: 300;
+        }
+
+        .participants-tags-grid span .pop-img-box img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .participants-tags-grid span:hover .pop-img-box,
+        .participants-tags-grid span:active .pop-img-box {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* =======================================================
+           6. قسم معرض الصور واللايكات (عدسة مصياف) - مربعات متراصفة
+           ======================================================= */
+        .gallery-section {
+            background: var(--white);
+            padding: 20px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        /* شبكة المربعات جنب بعض (3 أعمدة) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .gallery-card {
+            background: var(--light-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(42, 86, 71, 0.08);
+        }
+
+        /* إجبار الصورة تكون مربع متساوي الأبعاد 1:1 */
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* نسبة 1:1 مربع */
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:active img {
+            transform: scale(1.08);
+        }
+/* =======================================================
+   تنسيق زر اللايك (اللون الذهبي)
+   ======================================================= */
+.like-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    background: var(--white, #ffffff);
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888888;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.like-btn:active {
+    transform: scale(1.3);
+}
+
+/* التغيير هنا: إعطاء لون ذهبي للقلب عند الضغط عليه */
+.like-btn.liked {
+    color: var(--accent-color, #D2B372) !important;
+}
+
+.like-count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #555555;
+}
+
+        /* =======================================================
+   تنسيقات نافذة التكبير (Modal Lightbox)
+   ======================================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 20px;
+}
+
+/* إظهار النافذة عند إضافة كلاس active */
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: #ffffff;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container navbar">
+        <!-- الشعار في الأعلى ليكون بالوسط تماماً -->
+        <div class="nav-logo-row">
+            <a href="index.html#hero">
+                <img src="شفاف%20%20قنديل.png" alt="شعار مصياف قنديل" class="nav-logo">
+            </a>
+        </div>
+
+        <!-- روابط التنقل تحت الشعار مباشرة -->
+        <div class="nav-links-row">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" title="الرئيسية"> الرئيسيـة </a></li>
+                    <li><a href="index.html#stats">قنديل في أرقام</a></li>
+                    <li><a href="seasons.html">برامـج قنديل</a></li>
+                    <li><a href="newp.html">جريـدة قنديـل</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- 3. زر كن مضيئاً بحجم صغير وملموم في الأسفل -->
+        <div class="nav-bottom-row">
+            <a href="IBAN.html" target="_blank" class="nav-support-btn">
+                كُـــن مــضــيـئًـا <i class="fa-solid fa-hand-holding-heart"></i>
+            </a>
+        </div>
+
+    </div>
+</header>
+
+    <div class="container">
+
+        <!-- =======================================================
+             الصفحة الرئيسية: قائمة المواسم
+             ======================================================= -->
+        <div id="seasonsHome" class="page-view active">
+            <div class="seasons-section">
+                <h2 class="section-title">برامـج قـنـديـل </h2>
+                <div class="seasons-grid">
+
+                    <!-- 1. مصياف قنديل -->
+                    <div class="season-card" onclick="openSeason('masyafPage')">
+                        <div class="season-info">
+                            <div class="season-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+                            <div class="season-details">
+                                <h3>مصياف قنديل</h3>
+                                <p>الموســـم الـرابــــع</p>
+                            </div>
+                        </div>
+                        <span class="season-tag">عرض التفاصيل</span>
+                    </div>
+
+                    <!-- 2. برنامج قنديل لحفظ الوحيين (قريباً) -->
+<div class="season-card disabled" onclick="alert('برنامج قنديل لحفظ الوحيين سيعلن عنه قريباً!')">
+    <div class="season-info">
+        <!-- تم تغيير الأيقونة هنا إلى الهلال fa-moon -->
+        <div class="season-icon"><i class="fa-solid fa-moon"></i></div>
+        <div class="season-details">
+            <h3>برنامج قنديل لحفظ الوحيين</h3>
+            <p>الموســــم العاشـــر</p>
+        </div>
+    </div>
+    <span class="season-tag coming-soon">قريباً</span>
+</div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- =======================================================
+             تفاصيل موسم: مصياف قنديل
+             ======================================================= -->
+        <div id="masyafPage" class="page-view">
+            <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-right"></i> العودة للمواسم</button>
+
+            <!-- 1. الأهداف المنجزة -->
+            <div class="goals-section">
+                <h2 class="section-title"> الأهداف المنجزة في مصياف قنديل</h2>
+                <ul class="goals-list">
+                    <li><i class="fa-solid fa-circle-check"></i>اكتمال 100% من حصالة دعم المصياف بفضل عطائكم.</li>
+                    <li><i class="fa-solid fa-circle-check"></i> انضمام 75 مشتركًا ومشتركة من مختلف الفئات.</li>
+                    <li><i class="fa-solid fa-circle-check"></i> حفظ أحاديث نبوية مختارة وتطبيقاتها العملية.</li>
+                    <li><i class="fa-solid fa-circle-check"></i> إتقان الأذكار والأدعية اليومية وغرس المفاهيم الإيمانية.</li>
+                    <li><i class="fa-solid fa-circle-check"></i> تنمية المهارات القيادية والحوارية وإطلاق مبادرات أثرية.</li>
+                </ul>
+            </div>
+
+            <!-- 2. قسم أبطال مصياف قنديل (منصة التتويج) -->
+            <div class="champions-section">
+                <h2 class="section-title">🏆 أبطال مصياف قنديل</h2>
+
+                <div class="categories-wrapper">
+
+                    <!-- 1. فئة البراعم -->
+                    <div class="category-column">
+                        <h3 class="category-header">فئـة البـراعـم</h3>
+                        <div class="podium-container">
+                            <!-- المركز الثاني -->
+                            <div class="podium-step step-2">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="شيخه%20معجب.jpeg" class="podium-avatar" alt="شيخـة معجـب">
+                                    <span class="podium-badge">2</span>
+                                </div>
+                                <span class="podium-name">شيخـة معجـب</span>
+                                <div class="podium-block">2</div>
+                            </div>
+
+                            <!-- المركز الأول -->
+                            <div class="podium-step step-1">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="شيهانه.png" class="podium-avatar" alt="شيهـانه محمـد">
+                                    <span class="podium-badge">1</span>
+                                </div>
+                                <span class="podium-name">شيهـانه محمـد</span>
+                                <div class="podium-block">1</div>
+                            </div>
+
+                            <!-- المركز الثالث -->
+                            <div class="podium-step step-3">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="فهاد.png" class="podium-avatar" alt="فهـاد إبراهيـم">
+                                    <span class="podium-badge">3</span>
+                                </div>
+                                <span class="podium-name">فهـاد إبراهيـم</span>
+                                <div class="podium-block">3</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. فئة النجوم (مركز أول مكرر) -->
+                    <div class="category-column">
+                        <h3 class="category-header">فئـة النجـوم</h3>
+                        <div class="podium-container">
+                            <!-- المركز الثاني -->
+                            <div class="podium-step step-2">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="زياد%20.jpeg" class="podium-avatar" alt="زيـاد محمد">
+                                    <span class="podium-badge">2</span>
+                                </div>
+                                <span class="podium-name">زيـاد محمد</span>
+                                <div class="podium-block">2</div>
+                            </div>
+
+                            <!-- المركز الأول المكرر -->
+                            <div class="podium-step step-1 step-tied">
+                                <div class="podium-avatar-wrapper tied-avatars">
+                                    <img src="غالب%20ضيف%20الله%20غالب.jpeg" class="podium-avatar" alt="غالـب ضيـف الله">
+                                    <img src="عبدالعزيز.jpeg" class="podium-avatar tied-second" alt="عبدالعزيز">
+                                    <span class="podium-badge">1</span>
+                                </div>
+                                <span class="podium-name">غالـب & عبدالعزيز</span>
+                                <div class="podium-block">1</div>
+                            </div>
+
+                            <!-- المركز الثالث -->
+                            <div class="podium-step step-3">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="سلطان%20ساره.png" class="podium-avatar" alt="سـارة سلطـان">
+                                    <span class="podium-badge">3</span>
+                                </div>
+                                <span class="podium-name">سـارة سلطـان</span>
+                                <div class="podium-block">3</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. فئة الزهور -->
+                    <div class="category-column">
+                        <h3 class="category-header">فئـة الزهـور</h3>
+                        <div class="podium-container">
+                            <!-- المركز الثاني -->
+                            <div class="podium-step step-2">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="نوف.jpeg" class="podium-avatar" alt="نـوف محمد">
+                                    <span class="podium-badge">2</span>
+                                </div>
+                                <span class="podium-name">نـوف محمد</span>
+                                <div class="podium-block">2</div>
+                            </div>
+
+                            <!-- المركز الأول -->
+                            <div class="podium-step step-1">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="الجوري.jpeg" class="podium-avatar" alt="الجـوري عبدالله">
+                                    <span class="podium-badge">1</span>
+                                </div>
+                                <span class="podium-name">الجـوري عبدالله</span>
+                                <div class="podium-block">1</div>
+                            </div>
+
+                            <!-- المركز الثالث -->
+                            <div class="podium-step step-3">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="ديما.jpeg" class="podium-avatar" alt="ديمـا عبدالله">
+                                    <span class="podium-badge">3</span>
+                                </div>
+                                <span class="podium-name">ديمـا عبدالله</span>
+                                <div class="podium-block">3</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. فئة الرواد (مركز ثالث مكرر) -->
+                    <div class="category-column">
+                        <h3 class="category-header">فئـة الـرواد</h3>
+                        <div class="podium-container">
+                            <!-- المركز الثاني -->
+                            <div class="podium-step step-2">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="girl-avatar.png" class="podium-avatar" alt="نـوف سعـد">
+                                    <span class="podium-badge">2</span>
+                                </div>
+                                <span class="podium-name">نـوف سعـد</span>
+                                <div class="podium-block">2</div>
+                            </div>
+
+                            <!-- المركز الأول -->
+                            <div class="podium-step step-1">
+                                <div class="podium-avatar-wrapper">
+                                    <img src="girl-avatar.png" class="podium-avatar" alt="جـواهـر صاهـود">
+                                    <span class="podium-badge">1</span>
+                                </div>
+                                <span class="podium-name">جـواهـر صاهـود</span>
+                                <div class="podium-block">1</div>
+                            </div>
+
+                            <!-- المركز الثالث المكرر -->
+                            <div class="podium-step step-3 step-tied">
+                                <div class="podium-avatar-wrapper tied-avatars">
+                                    <img src="girl-avatar.png" class="podium-avatar" alt="عايشـه عيـد">
+                                    <img src="girl-avatar.png" class="podium-avatar tied-second" alt="وئـام سعـد">
+                                    <span class="podium-badge">3</span>
+                                </div>
+                                <span class="podium-name">عايشـه & وئـام</span>
+                                <div class="podium-block">3</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 3. جميع المشاركين (القائمة المنسدلة بالفئات الأربع) -->
+            <div class="accordion-section">
+                <h2 class="section-title">👥 جميع المشاركين في الموسم</h2>
+                <div class="categories-accordion">
+
+                    <!-- فئة البراعم -->
+                    <div class="category-item">
+                        <button class="category-btn" onclick="toggleCategory(this)">
+                            <div class="cat-btn-title">
+                                <span>🌱 فئة البراعم (13)</span>
+                                <span class="cat-supervisors">إشراف: أ. وجدان عبدالله</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down cat-icon"></i>
+                        </button>
+                        <div class="category-content">
+                            <div class="participants-tags-grid">
+                                <span><div class="pop-img-box"><img src="تميم.png" alt="تميم"></div>تميم محمد تميم</span>
+                                <span><div class="pop-img-box"><img src="شيهانه.png" alt="شيهانه"></div>شيهانه محمد حضيض</span>
+                                <span><div class="pop-img-box"><img src="غالب%20سعد.jpeg" alt="غالب"></div>غالب سعد غالب</span>
+                                <span><div class="pop-img-box"><img src="فالح.png" alt="فالح"></div>فالح محمد القحطاني</span>
+                                <span><div class="pop-img-box"><img src="شيخه%20معجب.jpeg" alt="شيخة"></div>شيخة معجب سالم</span>
+                                <span><div class="pop-img-box"><img src="نجلاء%20غالب.png" alt="نجلاء"></div>نجلاء غالب مهنا</span>
+                                <span><div class="pop-img-box"><img src="البتـول.png" alt="البتول"></div>البتول عطالله سعد</span>
+                                <span><div class="pop-img-box"><img src="سلطان.jpeg" alt="سلطان"></div>سلطان مقبل القحطاني</span>
+                                <span><div class="pop-img-box"><img src="ساره.jpeg" alt="ساره"></div>ساره محمد علي</span>
+                                <span><div class="pop-img-box"><img src="العنود%20عيد.jpeg" alt="العنود"></div>العنود عيد الفويند</span>
+                                <span><div class="pop-img-box"><img src="1aziz.png" alt="فهاد"></div>فهاد ابراهيم ال وصل</span>
+                                <span><div class="pop-img-box"><img src="عبدالمجيد.png" alt="عبدالمجيد"></div>عبدالمجيد سعد حويزي</span>
+                                <span><div class="pop-img-box"><img src="نجد.jpeg" alt="نجد"></div>نجد خالد مشبب</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فئة النجوم -->
+                    <div class="category-item">
+                        <button class="category-btn" onclick="toggleCategory(this)">
+                            <div class="cat-btn-title">
+                                <span>⭐ فئة النجوم (30)</span>
+                                <span class="cat-supervisors">إشراف: أ. بشاير حمود ، أ. هيا فهد</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down cat-icon"></i>
+                        </button>
+                        <div class="category-content">
+                            <div class="participants-tags-grid">
+                                <span><div class="pop-img-box"><img src="نوره%20سعد.png" alt="نورة"></div>نورة سعد محماس</span>
+                                <span><div class="pop-img-box"><img src="محمد.jpeg" alt="محمد"></div>محمد فيصل القحطاني</span>
+                                <span><div class="pop-img-box"><img src="سيف.png" alt="سيف"></div>سيف سعد الفويند</span>
+                                <span><div class="pop-img-box"><img src="عبدالعزيز.jpeg" alt="عبدالعزيز"></div>عبدالعزيز محمد شالح</span>
+                                <span><div class="pop-img-box"><img src="زياد%20.jpeg" alt="زياد"></div>زياد محمد شالح</span>
+                                <span><div class="pop-img-box"><img src="سند.jpeg" alt="سند"></div>سند فهد مثل</span>
+                                <span><div class="pop-img-box"><img src="غالب%20ضيف%20الله%20غالب.jpeg" alt="غالب"></div>غالب ضيف الله</span>
+                                <span><div class="pop-img-box"><img src="نوره%20محماس.png" alt="نوره"></div>نوره محماس</span>
+                                <span><div class="pop-img-box"><img src="فيصل.jpeg" alt="فيصل"></div>فيصل هاجس</span>
+                                <span><div class="pop-img-box"><img src="جود.jpeg" alt="جود"></div>جود هاجس</span>
+                                <span><div class="pop-img-box"><img src="العنود.jpeg" alt="العنود"></div>العنود عيد نايف</span>
+                                <span><div class="pop-img-box"><img src="بشاير.png" alt="بشاير"></div>بشاير غالب عيد</span>
+                                <span><div class="pop-img-box"><img src="سلطان%20بليه%20مبارك.jpeg" alt="سلطان"></div>سلطان بليه مبارك</span>
+                                <span><div class="pop-img-box"><img src="إبراهيم.jpeg" alt="إبراهيم"></div>إبراهيم فهاد مهنا</span>
+                                <span><div class="pop-img-box"><img src="نجلاءء.png" alt="نجلاء"></div>نجلاء سعد مبارك</span>
+                                <span><div class="pop-img-box"><img src="اروى.jpeg" alt="أروى"></div>أروى محمد القحطاني</span>
+                                <span><div class="pop-img-box"><img src="شفاف%20%20قنديل.png" alt="منال"></div>منال غالب مهنا</span>
+                                <span><div class="pop-img-box"><img src="عمر.jpeg" alt="عمر"></div>عمر عطالله سعد</span>
+                                <span><div class="pop-img-box"><img src="ريوف.jpeg" alt="ريوف"></div>ريوف فهد القحطاني</span>
+                                <span><div class="pop-img-box"><img src="حظيظ.jpeg" alt="حظيظ"></div>حظيظ خالد السويدان</span>
+                                <span><div class="pop-img-box"><img src="ريم.jpeg" alt="ريم"></div>ريم فيصل سعد</span>
+                                <span><div class="pop-img-box"><img src="جميلة.png" alt="جميلة"></div>جميلة ابراهيم مهنا</span>
+                                <span><div class="pop-img-box"><img src="شهد.jpeg" alt="شهد"></div>شهد محمد علي</span>
+                                <span><div class="pop-img-box"><img src="سالم.jpeg" alt="سالم"></div>سالم عيد الفونيد</span>
+                                <span><div class="pop-img-box"><img src="بندر.jpeg" alt="بندر"></div>بندر مهنا وصل</span>
+                                <span><div class="pop-img-box"><img src="ديم.jpeg" alt="ديم"></div>ديم محمد حمود</span>
+                                <span><div class="pop-img-box"><img src="سلطان%20ساره.png" alt="سارة"></div>سارة سلطان القحطاني</span>
+                                <span><div class="pop-img-box"><img src="افنان.png" alt="أفنان"></div>أفنان سلطان القحطاني</span>
+                                <span><div class="pop-img-box"><img src="نورة.jpg" alt="نوره"></div>نـوره فهد القحطاني</span>
+                                <span><div class="pop-img-box"><img src="مريم%20محمد.png" alt="مريم"></div>مريـم محمـد القحطاني</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فئة الزهور -->
+                    <div class="category-item">
+                        <button class="category-btn" onclick="toggleCategory(this)">
+                            <div class="cat-btn-title">
+                                <span>🌸 فئة الزهور (21)</span>
+                                <span class="cat-supervisors">إشراف: أ. ساره سعد الفويند</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down cat-icon"></i>
+                        </button>
+                        <div class="category-content">
+                            <div class="participants-tags-grid">
+                                <span><div class="pop-img-box"><img src="ضي.jpeg" alt="ضي"></div>ضي سعود حسن</span>
+                                <span><div class="pop-img-box"><img src="ديما.jpeg" alt="ديما"></div>ديما عبدالله هذال</span>
+                                <span><div class="pop-img-box"><img src="الجوري.jpeg" alt="الجوري"></div>الجوري عبدالله هذال</span>
+                                <span><div class="pop-img-box"><img src="غاده.jpeg" alt="غاده"></div>غاده سعد الفويند</span>
+                                <span><div class="pop-img-box"><img src="نوف%20فهد.jpeg" alt="نوف"></div>نوف فهد مثل</span>
+                                <span><div class="pop-img-box"><img src="فيصل%20محماس.jpeg" alt="فيصل"></div>فيصل محماس</span>
+                                <span><div class="pop-img-box"><img src="نوف.jpeg" alt="نوف"></div>نوف محمد مقبل</span>
+                                <span><div class="pop-img-box"><img src="رهف%20ثقل.jpeg" alt="رهف"></div>رهف ثقل ابراهيم</span>
+                                <span><div class="pop-img-box"><img src="رغد.jpeg" alt="رغد"></div>رغد محمد القحطاني</span>
+                                <span><div class="pop-img-box"><img src="عبدالله.jpeg" alt="عبدالله"></div>عبدالله سعد مبارك</span>
+                                <span><div class="pop-img-box"><img src="محمد%20عطالله.jpeg" alt="محمد"></div>محمد عطالله سعد</span>
+                                <span><div class="pop-img-box"><img src="شيخة.png" alt="شيخة"></div>شيخه محمد حضيض</span>
+                                <span><div class="pop-img-box"><img src="العنود%20فهد.jpeg" alt="العنود"></div>العنود فهد القحطاني</span>
+                                <span><div class="pop-img-box"><img src="ود.jpeg" alt="ود"></div>ود سعد حسن</span>
+                                <span><div class="pop-img-box"><img src="ابراهيم.jpeg" alt="ابراهيم"></div>ابراهيم سعد حسن</span>
+                                <span><div class="pop-img-box"><img src="جنان.jpeg" alt="جنان"></div>جنان مقبل القحطاني</span>
+                                <span><div class="pop-img-box"><img src="شفاف%20%20قنديل.png" alt="وضحى"></div>وضحى فيصل سعد</span>
+                                <span><div class="pop-img-box"><img src="سلطان2.jpeg" alt="سلطان"></div>سلطان فيصل سعد</span>
+                                <span><div class="pop-img-box"><img src="بشاير%20حمود.jpeg" alt="بشاير"></div>بشاير محمد حمود</span>
+                                <span><div class="pop-img-box"><img src="شيخه%20مهنا.jpeg" alt="شيخه"></div>شيخه مهنا وصل</span>
+                                <span><div class="pop-img-box"><img src="رهف.jpeg" alt="رهف"></div>رهف بنت محمد</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فئة الرواد -->
+                    <div class="category-item">
+                        <button class="category-btn" onclick="toggleCategory(this)">
+                            <div class="cat-btn-title">
+                                <span>🚀 فئة الرواد (23)</span>
+                                <span class="cat-supervisors">إشراف: أ. نوف عبدالله ، أ. ساره إبراهيم</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down cat-icon"></i>
+                        </button>
+                        <div class="category-content">
+                            <div class="participants-tags-grid">
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="ريدا"></div>ريدا فهد مثل</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="منى"></div>منى فيصل مبارك</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="تغريد"></div>تغريد فهد مثل</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="رهف"></div>رهف مطر مطلق</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="نوره"></div>نوره وصل بليه</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="غلا"></div>غلا هاجس</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="ريم"></div>ريم ثقل ابراهيم</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="غادة"></div>غادة عبد الله حطحوط</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="جواهر"></div>جواهر صاهود</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="مي"></div>مي إبراهيم حمد</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="غلا"></div>غلا ابراهيم حمد</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="الهنوف"></div>الهنوف فهد الفويند</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="نوف"></div>نوف سعد الفويند</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="وئام"></div>وئام سعد حسن</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="ندى"></div>ندى فيصل سعد</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="الجازي"></div>الجازي فيصل سعد</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="ساره"></div>ساره فيصل سعد</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="عايشة"></div>عايشة عيد الفونيد</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="جازاء"></div>جازاء فيصل إبراهيم</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="وضحى"></div>وضحى عيد الفويند</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="قمراء"></div>قمراء عيد الفويند</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="نوره"></div>نوره عيد الفونيد</span>
+                                <span><div class="pop-img-box"><img src="girl-avatar.png" alt="ريتاج"></div>ريتاج محماس</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 4. قسم معرض الصور واللايكات (عدسة مصياف) -->
+<div class="gallery-section">
+    <h2 class="section-title">📸 عدسة مصياف</h2>
+    <div class="gallery-grid">
+        <div class="gallery-card">
+            <!-- تم توحيد اسم الصورة p1.jpg -->
+            <div class="gallery-item" onclick="openModal('p1.jpg')">
+                <img src="p1.jpg" alt="لقطة 1">
+            </div>
+            <div class="like-bar">
+                <button class="like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i></button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+        <div class="gallery-card">
+            <div class="gallery-item" onclick="openModal('p2.jpg')">
+                <img src="p2.jpg" alt="لقطة 2">
+            </div>
+            <div class="like-bar">
+                <button class="like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i></button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+        <div class="gallery-card">
+            <div class="gallery-item" onclick="openModal('p3.jpg')">
+                <img src="p3.jpg" alt="لقطة 3">
+            </div>
+            <div class="like-bar">
+                <button class="like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i></button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+        <div class="gallery-card">
+            <div class="gallery-item" onclick="openModal('p4.jpg')">
+                <img src="p4.jpg" alt="لقطة 4">
+            </div>
+            <div class="like-bar">
+                <button class="like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i></button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+        <div class="gallery-card">
+            <div class="gallery-item" onclick="openModal('p5.jpg')">
+                <img src="p5.jpg" alt="لقطة 5">
+            </div>
+            <div class="like-bar">
+                <button class="like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i></button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+        <div class="gallery-card">
+            <div class="gallery-item" onclick="openModal('p6.jpg')">
+                <img src="p6.jpg" alt="لقطة 6">
+            </div>
+            <div class="like-bar">
+                <button class="like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i></button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- LightBox Modal للتكبير -->
+<div class="modal-overlay" id="imageModal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <img id="modalImg" src="" alt="صورة مكبرة">
+    </div>
+</div>
+
+    <script>
+        // التنقل بين الصفحات
+        function openSeason(pageId) {
+            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goHome() {
+            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
+            document.getElementById('seasonsHome').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Accordion
+        function toggleCategory(button) {
+            button.parentElement.classList.toggle('active');
+        }
+
+        // دالة فتح نافذة التكبير
+function openModal(imageSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImg');
+
+    if (modal && modalImg) {
+        modalImg.src = imageSrc;
+        modal.classList.add('active'); // إظهار النافذة
+    }
+}
+
+// دالة إغلاق النافذة
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        modal.classList.remove('active'); // إخفاء النافذة
+    }
+}
+
+        // Like Button Toggle
+        function toggleLike(button) {
+            const icon = button.querySelector('i');
+            const countSpan = button.nextElementSibling;
+            let currentCount = parseInt(countSpan.textContent);
+
+            if (button.classList.contains('liked')) {
+                button.classList.remove('liked');
+                icon.className = 'fa-regular fa-heart';
+                countSpan.textContent = currentCount - 1;
+            } else {
+                button.classList.add('liked');
+                icon.className = 'fa-solid fa-heart';
+                countSpan.textContent = currentCount + 1;
+            }
+        }
+    </script>
+
+</body>
+</html>
