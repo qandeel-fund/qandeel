@@ -440,30 +440,33 @@
             align-items: center;
         }
 
-        .participants-tags-grid span .pop-img-box {
-            position: absolute;
-            bottom: 120%;
-            left: 50%;
-            transform: translateX(-50%) scale(0.6);
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-            background-color: var(--white);
-            z-index: 300;
-        }
+        /* =======================================================
+   تنسيق ظهور صورة المشارك عند اللمسة الواحدة
+   ======================================================= */
+.participants-tags-grid span .pop-img-box {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.6);
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    background-color: var(--white);
+    z-index: 300;
+}
 
-        .participants-tags-grid span .pop-img-box img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+/* ظهور الصورة عند إضافة كلاس active بلمسة واحدة */
+.participants-tags-grid span.active .pop-img-box {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+}
 
         .participants-tags-grid span:hover .pop-img-box,
         .participants-tags-grid span:active .pop-img-box {
@@ -1139,6 +1142,31 @@ function closeModal() {
                 countSpan.textContent = currentCount + 1;
             }
         }
+        // التحكم بظهور صورة المشارك بلمسة واحدة
+document.addEventListener('DOMContentLoaded', function() {
+    const participantTags = document.querySelectorAll('.participants-tags-grid span');
+
+    participantTags.forEach(tag => {
+        tag.addEventListener('click', function(e) {
+            e.stopPropagation(); // منع انتشار الضغطة
+            
+            // إغلاق أي صورة مفتوحة أخرى
+            participantTags.forEach(otherTag => {
+                if (otherTag !== tag) {
+                    otherTag.classList.remove('active');
+                }
+            });
+
+            // فتح أو إغلاق صورة الاسم الملموس
+            this.classList.toggle('active');
+        });
+    });
+
+    // إغلاق الصورة عند الضغط في أي مكان خارجي في الشاشة
+    document.addEventListener('click', function() {
+        participantTags.forEach(tag => tag.classList.remove('active'));
+    });
+});
     </script>
 
 </body>
