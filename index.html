@@ -280,6 +280,33 @@
         </div>
     </section>
 
+
+<!-- قسم آراء ورسائل أمهات قنديل -->
+<section class="reviews-section" id="reviews">
+    <div class="container">
+        <div class="section-title">
+            <h2> مـاذا قالـوا عـن قنديـل ؟ </h2>
+            <p>شاركينا انطباعك وأثر تجربتك في برنامج قنديـل</p>
+        </div>
+
+        <div class="review-form-card">
+            <form id="reviewForm" onsubmit="return addReview(event)">
+                <div class="form-group-row">
+                    <input type="text" id="momName" placeholder="اسـم المشاركـ/ـة " required>
+                </div>
+                <textarea id="reviewText" rows="3" placeholder=" اكتب رسالتك أو انطباعك عن البرنامج ..." required></textarea>
+                <button type="submit" id="submitBtn" class="submit-review-btn">
+                    إرسال الرسالة <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="reviews-grid" id="reviewsGrid">
+            <!-- جاري تحميل الرسائل... -->
+        </div>
+    </div>
+</section>    
+
 <!-- قسم قنديل في أرقام -->
 <section id="stats" class="stats-section">
     <div class="container">
@@ -369,27 +396,100 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // دالة إطلاق قصاصات الاحتفال بألوان الهوية (ذهبي وزيتي)
-    function launchCelebration() {
-        var count = 200;
-        var defaults = {
-            origin: { y: 0.7 },
-            colors: ['#c5a059', '#b38b3f', '#2D4A3E', '#ffffff'] // الذهبي والزيتي والأبيض
-        };
+    // الربط مع مشروع Supabase الخاص بكِ
+const SUPABASE_URL = 'https://xdowyhritvgnfsgvfjxf.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ZgUoyo5AaEyX9qrDGy3eOQ_VclCKdwu';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        function fire(particleRatio, opts) {
-            confetti(Object.assign({}, defaults, opts, {
-                particleCount: Math.floor(count * particleRatio)
-            }));
-        }
+document.addEventListener("DOMContentLoaded", function() {
+    // حساب المبلغ المتبقي تلقائياً
+    const current = parseFloat(document.getElementById("current-amount")?.innerText) || 0;
+    const goal = parseFloat(document.getElementById("goal-amount")?.innerText) || 0;
+    let remaining = goal - current;
+    if (remaining < 0) remaining = 0;
+    
+    const remainingEl = document.getElementById("remaining-amount");
+    if (remainingEl) remainingEl.innerText = remaining;
 
-        fire(0.25, { spread: 26, startVelocity: 55 });
-        fire(0.2,  { spread: 60 });
-        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-        fire(0.1,  { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-        fire(0.1,  { spread: 120, startVelocity: 45 });
-    }
+    // جلب الرسائل المخزنة فور فتح الصفحة
+    loadReviews();
 });
+
+// دالة جلب الرسائل من قاعدة البيانات
+async function loadReviews() {
+    const reviewsGrid = document.getElementById('reviewsGrid');
+    if (!reviewsGrid) return;
+
+    reviewsGrid.innerHTML = '<p style="text-align: center; color: #888; width: 100%;">جاري تحميل الرسائل... 🌱</p>';
+
+    const { data: reviews, error } = await supabaseClient
+        .from('reviews')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        console.error('خطأ في جلب الرسائل:', error);
+        reviewsGrid.innerHTML = '<p style="text-align: center; color: #888; width: 100%;">تعذر تحميل الرسائل حالياً.</p>';
+        return;
+    }
+
+    reviewsGrid.innerHTML = '';
+
+    if (!reviews || reviews.length === 0) {
+        reviewsGrid.innerHTML = '<p style="text-align: center; color: #888; width: 100%;">كن أول من يشاركنا انطباعه 🤍</p>';
+        return;
+    }
+
+    reviews.forEach(review => {
+        const reviewCard = document.createElement('div');
+        reviewCard.className = 'review-card';
+        reviewCard.innerHTML = `
+            <div class="review-header">
+                <div class="review-avatar"><i class="fa-solid fa-heart"></i></div>
+                <div class="review-info">
+                    <h4>${review.mom_name}</h4>
+                </div>
+            </div>
+            <p class="review-text">"${review.review_text}"</p>
+        `;
+        reviewsGrid.appendChild(reviewCard);
+    });
+}
+
+// دالة إرسال وحفظ الرسالة في Supabase
+async function addReview(e) {
+    if (e) e.preventDefault();
+
+    const momName = document.getElementById('momName').value.trim();
+    const reviewText = document.getElementById('reviewText').value.trim();
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (!momName || !reviewText) {
+        alert("لطفاً اكمل كافة الحقول قبل الإرسال 🌱");
+        return false;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "جاري الإرسال...";
+
+    const { error } = await supabaseClient
+        .from('reviews')
+        .insert([{ mom_name: momName, review_text: reviewText }]);
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'إرسال الرسالة <i class="fa-solid fa-paper-plane"></i>';
+
+    if (error) {
+        console.error('خطأ في حفظ الرسالة:', error);
+        alert('حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة لاحقاً.');
+        return false;
+    }
+
+    document.getElementById('reviewForm').reset();
+    alert("شكـرًا تم إرسال رسالتكِ بنجاح ! 🕯️");
+    loadReviews(); // إعادة جلب الرسائل مباشرة لتظهر الجديدة بأعلى القائمة
+    return false;
+}
 
 </script>
 <!-- استدعاء ملف الجافا سكريبت للعدادات وشريط التقدم فقط -->
