@@ -11,8 +11,12 @@
     <!-- مكتبة الأيقونات Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styleq.css">
+    
     <!-- مكتبة قصاصات الاحتفال الخفيفة -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- ⚡ مهم جداً: استدعاء مكتبة Supabase ⚡ -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <header>
@@ -45,38 +49,35 @@
 
     </div>
 </header>
+
 <section class="hero-section" id="hero">
     <div class="container hero-container">
-
         <h1 class="welcome-title"> <span class="brand-name"></span></h1>
 
         <div class="hero-intro-content">
             <h2 class="hero-main-text">مـع "قنـديل" نتعـلم ونؤمـن ونُـزهِـر</h2>
             <p class="hero-sub-text">أكثـر مـن برنـامج .. حـصص قرآنيـة ، دروس إيمانيـة ، آداب وأخـلاق ، مهـارات وترفيـه</p>
-            <p class="hero-vision-text">نسعدُ بكم وبأطفالكم ،
-لِنكملَ الحكاية بلونٍ جديد وعزمٍ أكيد🌱</p>
+            <p class="hero-vision-text">نسعدُ بكم وبأطفالكم ، لِنكملَ الحكاية بلونٍ جديد وعزمٍ أكيد🌱</p>
         </div>
-
     </div>
 </section>
 
-    <!-- لوحة التفاعل الرئيسية (المقسمة لعمودين يمين ويسار) -->
-    <section id="main-dashboard" class="dashboard-section">
-        <div class="container dashboard-grid">
+<!-- لوحة التفاعل الرئيسية -->
+<section id="main-dashboard" class="dashboard-section">
+    <div class="container dashboard-grid">
 
-            <!-- العمود الأيمن: الحصالة ممتدة بالطول -->
-            <div class="right-column-box">
-                <div class="section-title-box">
-                    <h2>🌙حصالة دعم برنامج قنديل لحفظ الوحيين </h2>
-                    <p>لنُحـقـق الهدف معًـا خطوةٍ بِخطوة</p>
-                </div>
-                <!-- صورة الحصالة الكبيرة -->
-                <div class="money-box-img-container">
-                    <img src="حصالةقنديل.png" alt="حصالة قنديل الكبيرة" class="money-box-large-img">
-                </div>
-                <!-- عداد الحصالة أسفل الصورة -->
-                <!-- عداد الحصالة أسفل الصورة -->
-                <div class="progress-container-box">
+        <!-- العمود الأيمن: الحصالة -->
+        <div class="right-column-box">
+            <div class="section-title-box">
+                <h2>🌙حصالة دعم برنامج قنديل لحفظ الوحيين </h2>
+                <p>لنُحـقـق الهدف معًـا خطوةٍ بِخطوة</p>
+            </div>
+
+            <div class="money-box-img-container">
+                <img src="حصالةقنديل.png" alt="حصالة قنديل الكبيرة" class="money-box-large-img">
+            </div>
+
+            <div class="progress-container-box">
                 <div class="progress-info-top">
                     <span>المبلغ الحالي: <strong id="current-amount">1000</strong> ر.س</span>
                     <span class="goal-text">الهدف: <strong id="goal-amount">50000</strong> ر.س</span>
@@ -89,8 +90,6 @@
                 <div class="progress-info-bottom">
                     <span>المبلـغ المتبقي : <strong id="remaining-amount">0</strong> ر.س</span>
                 </div>
-
-
             </div>
 
             <div class="families-legend">
@@ -117,9 +116,12 @@
             <div class="motivation-btn-row">
                 <a href="IBAN.html" class="btn-transfer-now">حــوّل الأن</a>
             </div>
-        </div> <!-- إغلاق العمود الأيمن بشكل صحيح هنا -->
+        </div>
 
-<!-- قسم آراء ورسائل أمهات قنديل (أولاً) -->
+    </div>
+</section>
+
+<!-- قسم آراء ورسائل أمهات قنديل -->
 <section class="reviews-section" id="reviews">
     <div class="container">
         <div class="section-title">
@@ -145,7 +147,7 @@
     </div>
 </section>
 
-<!-- قسم قنديل في أرقام (تحت قسم الرسائل) -->
+<!-- قسم قنديل في أرقام -->
 <section id="stats" class="stats-section">
     <div class="container">
         <div class="section-title">
@@ -171,8 +173,8 @@
         </div>
     </div>
 </section>
-    
-    <!-- الفوتر -->
+
+<!-- الفوتر -->
 <footer>
     <div class="container footer-container">
         <div class="footer-socials">
@@ -195,8 +197,18 @@
         </div>
     </div>
 </footer>
-    
+
 <script>
+// إعداد الربط مع Supabase
+const SUPABASE_URL = 'https://xdowyhritvgnfsgvfjxf.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ZgUoyo5AaEyX9qrDGy3eOQ_VclCKdwu';
+
+let supabaseClient;
+if (typeof supabase !== 'undefined') {
+    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+} else {
+    console.error("مكتبة Supabase لم يتم تحميلها بشكل صحيح.");
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     // 1. حساب المبلغ المتبقي تلقائياً
@@ -209,42 +221,24 @@ document.addEventListener("DOMContentLoaded", function() {
     const remainingEl = document.getElementById("remaining-amount");
     if (remainingEl) remainingEl.innerText = remaining;
 
-    // 2. إذا اكتمل المبلغ (المتبقي 0)، يتم تشغيل الاحتفال عند التمرير للخانة
-    if (remaining === 0) {
+    // 2. الاحتفال عند الشاشة إذا كان المتبقي 0
+    if (remaining === 0 && typeof confetti === 'function') {
         const targetSection = document.querySelector(".progress-container-box");
-
         if (targetSection) {
-            let hasCelebrated = false; // لمنع تكرار الاحتفال في كل سحب
-
+            let hasCelebrated = false;
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !hasCelebrated) {
-                        hasCelebrated = true; // يتم إطلاقه مرة واحدة فقط عند الرؤية
-                        launchCelebration();
+                        hasCelebrated = true;
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
                     }
                 });
-            }, { threshold: 0.5 }); // يعمل عند ظهور نصف الخانة على الشاشة
-
+            }, { threshold: 0.5 });
             observer.observe(targetSection);
         }
     }
 
-    // الربط مع مشروع Supabase الخاص بكِ
-const SUPABASE_URL = 'https://xdowyhritvgnfsgvfjxf.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_ZgUoyo5AaEyX9qrDGy3eOQ_VclCKdwu';
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-document.addEventListener("DOMContentLoaded", function() {
-    // حساب المبلغ المتبقي تلقائياً
-    const current = parseFloat(document.getElementById("current-amount")?.innerText) || 0;
-    const goal = parseFloat(document.getElementById("goal-amount")?.innerText) || 0;
-    let remaining = goal - current;
-    if (remaining < 0) remaining = 0;
-    
-    const remainingEl = document.getElementById("remaining-amount");
-    if (remainingEl) remainingEl.innerText = remaining;
-
-    // جلب الرسائل المخزنة فور فتح الصفحة
+    // 3. جلب الرسائل فور فتح الصفحة
     loadReviews();
 });
 
@@ -254,6 +248,11 @@ async function loadReviews() {
     if (!reviewsGrid) return;
 
     reviewsGrid.innerHTML = '<p style="text-align: center; color: #888; width: 100%;">جاري تحميل الرسائل... 🌱</p>';
+
+    if (!supabaseClient) {
+        reviewsGrid.innerHTML = '<p style="text-align: center; color: #d9534f; width: 100%;">تعذر الاتصال بقاعدة البيانات.</p>';
+        return;
+    }
 
     const { data: reviews, error } = await supabaseClient
         .from('reviews')
@@ -302,6 +301,11 @@ async function addReview(e) {
         return false;
     }
 
+    if (!supabaseClient) {
+        alert("خطأ في الاتصال بالخدمة، يرجى إعادة تحديث الصفحة.");
+        return false;
+    }
+
     submitBtn.disabled = true;
     submitBtn.innerText = "جاري الإرسال...";
 
@@ -323,9 +327,9 @@ async function addReview(e) {
     loadReviews(); // إعادة جلب الرسائل مباشرة لتظهر الجديدة بأعلى القائمة
     return false;
 }
-
 </script>
-<!-- استدعاء ملف الجافا سكريبت للعدادات وشريط التقدم فقط -->
+
+<!-- استدعاء ملف الجافا سكريبت للعدادات وشريط التقدم -->
 <script type="text/javascript" src="./script.js?v=1.2"></script>
 
 </body>
