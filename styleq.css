@@ -142,17 +142,264 @@ header {
     }
 }
 
-/* أيقونة المنزل */
-.home-icon {
-    font-size: 1.3rem;
-    color: var(--primary-color);
-    transition: var(--transition);
-    vertical-align: middle;
+/* ==========================================
+   قسم عن قنديل والرؤية والرسالة والأهداف (متجاوب)
+   ========================================== */
+
+/* الخلفية العامة للسيكشن */
+.about-section,
+#about-qandeel {
+    background-color: #faf7f5 !important;
+    padding: 50px 0;
 }
 
-.home-icon:hover {
-    color: var(--accent-color);
-    transform: scale(1.15);
+.about-overview-grid,
+.overview-card.main-about,
+.container {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* ------------------------------------------
+   1. بطاقة برنامج قنديل العلوية
+   ------------------------------------------ */
+.main-about-card {
+    background: #ffffff !important;
+    border-radius: 18px;
+    padding: 28px 24px;
+    border: 1px solid #f0eae1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+    margin-bottom: 25px;
+    text-align: right;
+}
+
+.main-about-card .about-card-logo {
+    max-height: 48px;
+    width: auto;
+    margin-bottom: 14px;
+    display: block;
+}
+
+.main-about-card h3 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.3rem;
+    color: #2a5647 !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px;
+}
+
+.main-about-card p {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    color: #333333 !important;
+    font-weight: 600 !important;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* ------------------------------------------
+   2. شبكة الرؤية والرسالة
+   ------------------------------------------ */
+.vision-mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.overview-card {
+    background: #ffffff !important;
+    border-radius: 18px;
+    padding: 28px 24px;
+    border: 1px solid #f0eae1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+}
+
+.card-icon {
+    font-size: 1.6rem;
+    color: #d2b372;
+    margin-bottom: 12px;
+}
+
+.overview-card h3 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.3rem;
+    color: #2a5647 !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px;
+}
+
+.overview-card p {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    color: #333333 !important;
+    font-weight: 600 !important;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* ------------------------------------------
+   3. رأس قسم الأهداف والأسهم
+   ------------------------------------------ */
+.goals-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.goals-title h2 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.4rem;
+    color: #2a5647 !important;
+    font-weight: 800;
+    margin: 0;
+}
+
+.slider-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.slider-arrow {
+    background: transparent;
+    border: 1px solid #d2b372 !important;
+    color: #2a5647 !important;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.slider-arrow:hover {
+    background: #d2b372;
+    color: #ffffff !important;
+    box-shadow: 0 0 10px rgba(210, 179, 114, 0.4);
+}
+
+/* ------------------------------------------
+   4. سلايدر بطاقات الأهداف
+   ------------------------------------------ */
+.goals-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 15px 5px 25px 5px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.goals-carousel::-webkit-scrollbar {
+    height: 5px;
+}
+
+.goals-carousel::-webkit-scrollbar-thumb {
+    background: #d2b372;
+    border-radius: 10px;
+}
+
+.goals-carousel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.goal-slider-card {
+    min-width: 260px;
+    max-width: 280px;
+    background: transparent !important;
+    border-radius: 18px;
+    padding: 24px 20px;
+    flex-shrink: 0;
+    position: relative;
+    border: 1.5px solid rgba(210, 179, 114, 0.6) !important;
+    box-shadow: 0 6px 18px rgba(210, 179, 114, 0.2) !important;
+    transition: all 0.3s ease;
+}
+
+.goal-slider-card:hover {
+    transform: translateY(-4px);
+    border-color: #d2b372 !important;
+    box-shadow: 0 8px 25px rgba(210, 179, 114, 0.4) !important;
+}
+
+.goal-num {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900;
+    color: #2a5647 !important;
+    font-size: 1.05rem;
+    background: rgba(210, 179, 114, 0.25) !important;
+    border: 1px solid rgba(210, 179, 114, 0.5);
+    padding: 3px 12px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.goal-slider-card h4 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.15rem;
+    color: #2a5647 !important;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+.goal-slider-card p {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.92rem;
+    color: #333333 !important;
+    font-weight: 500;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ==========================================
+   التجاوب مع شاشات الجوال والهواتف الذكية
+   ========================================== */
+@media (max-width: 768px) {
+    .about-section,
+    #about-qandeel {
+        padding: 30px 15px;
+    }
+
+    .main-about-card,
+    .overview-card {
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+
+    .main-about-card h3,
+    .overview-card h3 {
+        font-size: 1.15rem;
+    }
+
+    .main-about-card p,
+    .overview-card p {
+        font-size: 0.88rem;
+        line-height: 1.65;
+    }
+
+    .vision-mission-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .goals-title h2 {
+        font-size: 1.2rem;
+    }
+
+    .goal-slider-card {
+        min-width: 230px;
+        max-width: 250px;
+        padding: 18px 15px;
+    }
+
+    .goal-slider-card p {
+        font-size: 0.85rem;
+    }
 }
 
 /* ==========================================
