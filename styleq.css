@@ -18,6 +18,34 @@
     font-family: 'Cairo', sans-serif;
 }
 
+/* تنسيق بنر الهيدر الرئيسي *//* تنسيق البنر الرئيسي بعرض كامل وبدون زوايا دائرية */
+.hero-banner-container {
+    width: 100%;
+    margin: 0 0 20px 0;
+    padding: 0; /* إلغاء الحواف الداخلية لتتصل بالشاشة */
+    box-sizing: border-box;
+}
+
+.hero-banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0 !important; /* إلغاء الحواف الدائرية تماماً */
+    box-shadow: none; /* إلغاء الظل لإعطاء مظهر ثوري وفلات */
+    object-fit: cover;
+}
+
+/* للجوال: ثبات الصورة وتمددها الكامل */
+@media (max-width: 768px) {
+    .hero-banner-container {
+        margin: 0 0 16px 0;
+        padding: 0 !important;
+    }
+
+    .hero-banner-img {
+        border-radius: 0 !important;
+    }
+}
 html {
     scroll-behavior: smooth;
 }
