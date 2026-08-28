@@ -418,6 +418,20 @@ async function addReview(e) {
     loadReviews(); // إعادة جلب الرسائل مباشرة لتظهر الجديدة بأعلى القائمة
     return false;
 }
+     // دالة تحريك الأهداف يميناً ويساراً
+function scrollGoals(direction) {
+    const carousel = document.getElementById('goalsCarousel');
+    if (!carousel) return;
+
+    // التمرير بمقدار عرض بطاقتين
+    const scrollAmount = 300;
+
+    if (direction === 'left') {
+        carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+}
 </script>
 
 <!-- استدعاء ملف الجافا سكريبت للعدادات وشريط التقدم -->
