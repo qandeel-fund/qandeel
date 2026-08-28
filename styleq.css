@@ -401,6 +401,69 @@ header {
         font-size: 0.85rem;
     }
 }
+/* ==========================================
+   إصلاح العرض للجوال وتمديد البطاقات لتعبئة الشاشة
+   ========================================== */
+@media (max-width: 768px) {
+    /* تقليل الهوامش الخارجية للسيكشن للاستفادة من عرض الشاشة كامل */
+    .about-section,
+    #about-qandeel {
+        padding: 25px 10px !important;
+    }
+
+    .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        width: 100% !important;
+    }
+
+    /* جعل بطاقة برنامج قنديل وبطاقات الرؤية والرسالة بعرض الشاشة الكامل */
+    .main-about-card,
+    .overview-card {
+        width: 100% !important;
+        box-sizing: border-box;
+        padding: 20px 16px !important;
+        border-radius: 14px;
+        margin-bottom: 15px;
+    }
+
+    /* تنسيق الصورة أو الأيقونة داخل البطاقة */
+    .about-card-logo {
+        max-height: 40px;
+        margin: 0 auto 10px auto;
+        display: block;
+    }
+
+    .card-icon {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        text-align: right;
+    }
+
+    /* ضبط حجم ونمو النصوص لتكون مريحة جداً للقراءة */
+    .main-about-card h3,
+    .overview-card h3 {
+        font-size: 1.2rem !important;
+        margin-bottom: 8px !important;
+        text-align: right;
+    }
+
+    .main-about-card p,
+    .overview-card p {
+        font-size: 0.9rem !important;
+        line-height: 1.65 !important;
+        font-weight: 500 !important;
+        text-align: right;
+    }
+
+    /* جعل شبكة الرؤية والرسالة تتصفح عمودياً بسلاسة */
+    .vision-mission-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        margin-bottom: 25px !important;
+    }
+}
 
 /* ==========================================
    قسم آراء ورسائل أمهات قنديل
