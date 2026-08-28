@@ -143,106 +143,158 @@ header {
 }
 
 /* ==========================================
-   قسم عن قنديل والرؤية والرسالة والأهداف (نظيف ومدمج)
+   قسم عن قنديل والرؤية والرسالة والأهداف (معدّل وموزون)
    ========================================== */
 
-/* الخلفية العامة للسيكشن */
+/* الخلفية العامة للسيكشن باللون البيج الفاتح والنظيف */
 .about-section,
 #about-qandeel {
     background-color: #faf7f5 !important;
     padding: 50px 0;
-    width: 100%;
 }
 
+/* إزالة أي خلفيات زيتية أو إطارات سابقة */
 .about-overview-grid,
-.overview-card.main-about {
+.overview-card.main-about,
+.container {
     background: transparent !important;
     box-shadow: none !important;
 }
 
-/* ------------------------------------------
-   1. بطاقة برنامج قنديل العلوية
-   ------------------------------------------ */
-.main-about-card {
-    background: #ffffff !important;
-    border-radius: 18px;
-    padding: 28px 24px;
-    border: 1px solid #f0eae1;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
-    margin-bottom: 25px;
-    text-align: right;
+/* ==========================================
+   تنسيقات UX/UI الحديثة لبطاقات قنديل
+   ========================================== */
+
+.about-section {
+    background-color: #faf7f5 !important;
+    padding: 40px 15px;
     width: 100%;
+}
+
+/* الكارت الأساسي بتصميم مريح */
+.ui-card {
+    background: #ffffff !important;
+    border-radius: 16px;
+    padding: 22px 20px;
+    border: 1px solid #efe8dd;
+    border-right: 5px solid #2a5647 !important; /* لمسة جانبية تمنح الكارت هوية */
+    box-shadow: 0 4px 20px rgba(42, 86, 71, 0.04) !important;
+    margin-bottom: 20px;
     box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.main-about-card .about-card-logo {
-    max-height: 48px;
-    width: auto;
-    margin-bottom: 14px;
-    display: block;
-      margin-right:0;
-}
-
-.main-about-card h3 {
-    font-family: 'Cairo', sans-serif;
-    font-size: 1.3rem;
-    color: #2a5647 !important;
-    font-weight: 700 !important;
+/* ترويسة الكارت (الأيقونة + العنوان في خط واحد) */
+.card-header-inline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin-bottom: 12px;
 }
 
-.main-about-card p {
-    font-family: 'Cairo', sans-serif;
-    font-size: 0.95rem;
-    color: #333333 !important;
-    font-weight: 600 !important;
-    line-height: 1.8;
-    margin: 0;
+.card-icon-box {
+    width: 42px;
+    height: 42px;
+    background-color: rgba(210, 179, 114, 0.15);
+    color: #d2b372;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
 }
 
-/* ------------------------------------------
-   2. شبكة الرؤية والرسالة
-   ------------------------------------------ */
+.ui-card h3 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.25rem !important;
+    color: #2a5647 !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+.ui-card p {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.92rem !important;
+    color: #4a4a4a !important;
+    line-height: 1.75 !important;
+    margin: 0;
+    text-align: right;
+}
+
+.ui-card p strong {
+    color: #2a5647;
+    font-weight: 700;
+}
+
+/* شبكة الكروت (تكون بجانب بعضها في الشاشات الكبيرة وعمودية في الجوال) */
 .vision-mission-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-    margin-bottom: 40px;
-    width: 100%;
 }
 
-.overview-card {
-    background: #ffffff !important;
-    border-radius: 18px;
-    padding: 28px 24px;
-    border: 1px solid #f0eae1;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+/* ==========================================
+   التجاوب الخاص بالجوال
+   ========================================== */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 20px 12px !important;
+    }
+
+    .ui-card {
+        padding: 18px 16px !important;
+        margin-bottom: 14px !important;
+        border-radius: 14px;
+    }
+
+    .card-icon-box {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .ui-card h3 {
+        font-size: 1.1rem !important;
+    }
+
+    .ui-card p {
+        font-size: 0.88rem !important;
+        line-height: 1.65 !important;
+    }
+
+    .vision-mission-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 14px !important;
+    }
+/* المربع الخارجي بحجم موحد مع باقي الأيقونات */
+.main-card .card-icon-box {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px; /* مساحة تنفس مريحة للشعار داخل المربع */
     box-sizing: border-box;
 }
 
-.card-icon {
-    font-size: 1.6rem;
-    color: #d2b372;
-    margin-bottom: 12px;
+/* الشعار المقصوص ليناسب المربع تماماً */
+.card-icon-box .custom-card-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
-.overview-card h3 {
-    font-family: 'Cairo', sans-serif;
-    font-size: 1.3rem;
-    color: #2a5647 !important;
-    font-weight: 700 !important;
-    margin-bottom: 12px;
+/* التجاوب مع الجوال */
+@media (max-width: 768px) {
+    .main-card .card-icon-box {
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+    }
 }
-
-.overview-card p {
-    font-family: 'Cairo', sans-serif;
-    font-size: 0.95rem;
-    color: #333333 !important;
-    font-weight: 600 !important;
-    line-height: 1.8;
-    margin: 0;
-}
-
 /* ------------------------------------------
    3. رأس قسم الأهداف والأسهم
    ------------------------------------------ */
