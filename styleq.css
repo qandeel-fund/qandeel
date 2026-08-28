@@ -180,6 +180,7 @@ header {
     width: auto;
     margin-bottom: 14px;
     display: block;
+      margin-right:0;
 }
 
 .main-about-card h3 {
@@ -436,6 +437,15 @@ header {
 
     .goal-slider-card p {
         font-size: 0.85rem;
+    }
+}
+@media (max-width: 768px) {
+    .about-card-logo,
+    .main-about-card .about-card-logo {
+        max-height: 38px;
+        margin-right: 0 !important;
+        margin-left: auto !important;
+        display: block;
     }
 }
 
