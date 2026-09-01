@@ -171,138 +171,94 @@ header {
 }
 
 /* ==========================================
-   قسم عن قنديل والرؤية والرسالة والأهداف (معدّل وموزون)
+   تنسيق البنَر والرسالة والرؤية (حماية فائقة)
    ========================================== */
 
-/* الخلفية العامة للسيكشن باللون البيج الفاتح والنظيف */
-.about-section,
-#about-qandeel {
-    background-color: #faf7f5 !important;
-    padding: 50px 0;
-}
-
-/* إزالة أي خلفيات زيتية أو إطارات سابقة */
-.about-overview-grid,
-.overview-card.main-about,
-.container {
-    background: transparent !important;
-    box-shadow: none !important;
-}
-/* ==========================================
-   1. بنر الهيدر (فلات وبدون زوايا دائرية)
-   ========================================== */
+/* 1. البنَر الفلات */
 .hero-banner-container {
-    width: 100%;
-    margin: 0 0 20px 0;
-    padding: 0;
-    box-sizing: border-box;
+    width: 100% !important;
+    margin: 0 0 15px 0 !important;
+    padding: 0 !important;
 }
 
 .hero-banner-img {
-    width: 100%;
-    height: auto;
-    display: block;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
     border-radius: 0 !important;
-    box-shadow: none;
-    object-fit: cover;
+    box-shadow: none !important;
+    object-fit: cover !important;
 }
 
-/* ==========================================
-   2. قسم الرسالة والرؤية (مربعين بجانب بعض)
-   ========================================== */
-.about-section {
-    background-color: #faf7f5 !important;
-    padding: 20px 10px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* استخدام Grid لفرض ظهور المربعين بجانب بعض دائماً */
+/* 2. فرض الشبكة الأفقية للمربعين */
 .vision-mission-grid {
     display: grid !important;
-    grid-template-columns: 1fr 1fr !important; /* عمودان متساويان */
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* يضمن مساحتين متساويتين تماماً */
     gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
-/* تنسيق الكروت */
-.ui-card {
+/* 3. إلغاء أي سلوك Flex قديم قد يؤثر عليهما */
+.vision-mission-grid .ui-card {
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
     background: #ffffff !important;
-    border-radius: 12px;
-    padding: 14px 12px !important;
-    border: 1px solid #efe8dd;
+    border-radius: 12px !important;
+    padding: 12px 10px !important;
+    border: 1px solid #efe8dd !important;
     border-right: 4px solid #2a5647 !important;
-    box-shadow: 0 3px 10px rgba(42, 86, 71, 0.04) !important;
-    box-sizing: border-box;
-    margin: 0 !important; /* إلغاء الهوامش السفلية التي تبعد الكروت عن بعضها */
 }
 
-/* الترويسة (الأيقونة والعنوان) */
 .card-header-inline {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin-bottom: 8px !important;
 }
 
 .card-icon-box {
-    width: 32px;
-    height: 32px;
-    background-color: rgba(210, 179, 114, 0.15);
-    color: #d2b372;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    flex-shrink: 0;
+    width: 30px !important;
+    height: 30px !important;
+    background-color: rgba(210, 179, 114, 0.15) !important;
+    color: #d2b372 !important;
+    border-radius: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.85rem !important;
+    flex-shrink: 0 !important;
 }
 
 .ui-card h3 {
-    font-family: 'Cairo', sans-serif;
-    font-size: 0.98rem !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.9rem !important;
     color: #2a5647 !important;
     font-weight: 700 !important;
     margin: 0 !important;
+    white-space: nowrap !important; /* يمنع انكسار العنوان */
 }
 
 .ui-card p {
-    font-family: 'Cairo', sans-serif;
-    font-size: 0.8rem !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.75rem !important;
     color: #4a4a4a !important;
-    line-height: 1.55 !important;
-    margin: 0;
-    text-align: right;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+    text-align: right !important;
 }
 
 .ui-card p strong {
-    color: #2a5647;
+    color: #2a5647 !important;
 }
 
-/* ==========================================
-   3. التجاوب مع شاشات الجوال
-   ========================================== */
+/* 4. الحفاظ على المربعين مجاورين حتى على الجوال */
 @media (max-width: 768px) {
-    .hero-banner-container {
-        margin: 0 0 14px 0;
-    }
-
     .vision-mission-grid {
         display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 8px !important;
-    }
-
-    .ui-card {
-        padding: 12px 10px !important;
-    }
-
-    .ui-card h3 {
-        font-size: 0.9rem !important;
-    }
-
-    .ui-card p {
-        font-size: 0.76rem !important;
-        line-height: 1.48 !important;
     }
 }
 /* ------------------------------------------
