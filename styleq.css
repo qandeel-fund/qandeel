@@ -169,56 +169,58 @@ header {
         width: 80% !important; /* يأخذ مساحة مناسبة ومريحة للضغط بالإصبع على الجوال */
     }
 }
+/* ==========================================
+   إلغاء الخلفية الزيتية وفرض الكروت البيضاء أفقياً
+   ========================================== */
 
-/* إلغاء أي خلفيات زيتية سابقة على السيكشن */
-#about-qandeel, 
-.about-section {
+/* السيكشن الخارجي باللون البيج الفاتح بدون أي خلفية زيتية */
+.clean-about-section,
+#about-qandeel {
     background-color: #faf7f5 !important;
-    padding: 20px 12px !important;
+    background: #faf7f5 !important;
+    padding: 20px 10px !important;
     width: 100% !important;
     box-sizing: border-box !important;
 }
 
-/* فرض التنسيق الأفقي (مربعين جنب بعض) بنسبة 100% */
-.vision-mission-grid {
-    display: flex !important;
-    flex-direction: row !important; /* يضمن بقائهما أفقياً */
-    justify-content: space-between !important;
+/* الحاوية الأفقية للمربعين */
+.side-by-side-wrapper {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* فرض عمودين أفقياً */
     gap: 10px !important;
     width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    background: transparent !important; /* إزالة أي لون زيتي خارجي */
+    background: transparent !important;
     padding: 0 !important;
     margin: 0 !important;
+    box-sizing: border-box !important;
 }
 
-/* تنسيق المربعين الداخليين */
-.vision-mission-grid .custom-card {
-    flex: 1 1 50% !important; /* إعطاء كل مربع نصف المساحة تماماً */
-    width: 50% !important;
+/* المربع الأبيض */
+.side-by-side-wrapper .white-card {
+    background-color: #ffffff !important;
     background: #ffffff !important;
     border-radius: 12px !important;
     padding: 12px 10px !important;
     border: 1px solid #efe8dd !important;
-    border-right: 4px solid #2a5647 !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    border-right: 4px solid #2a5647 !important; /* الخط الزيتي الجانبي فقط */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04) !important;
     box-sizing: border-box !important;
     margin: 0 !important;
+    width: 100% !important;
 }
 
-/* ترتيب الأيقونة والعنوان */
-.card-header-inline {
+/* الترويسة والأيقونة والعنوان */
+.side-by-side-wrapper .card-header-inline {
     display: flex !important;
     align-items: center !important;
     gap: 6px !important;
     margin-bottom: 6px !important;
 }
 
-.card-icon-box {
+.side-by-side-wrapper .card-icon-box {
     width: 28px !important;
     height: 28px !important;
-    background-color: rgba(210, 179, 114, 0.15) !important;
+    background-color: rgba(210, 179, 114, 0.18) !important;
     color: #d2b372 !important;
     border-radius: 6px !important;
     display: flex !important;
@@ -228,7 +230,7 @@ header {
     flex-shrink: 0 !important;
 }
 
-.vision-mission-grid .custom-card h3 {
+.side-by-side-wrapper .white-card h3 {
     font-family: 'Cairo', sans-serif !important;
     font-size: 0.88rem !important;
     color: #2a5647 !important;
@@ -236,7 +238,7 @@ header {
     margin: 0 !important;
 }
 
-.vision-mission-grid .custom-card p {
+.side-by-side-wrapper .white-card p {
     font-family: 'Cairo', sans-serif !important;
     font-size: 0.72rem !important;
     color: #4a4a4a !important;
@@ -245,7 +247,7 @@ header {
     text-align: right !important;
 }
 
-.vision-mission-grid .custom-card p strong {
+.side-by-side-wrapper .white-card p strong {
     color: #2a5647 !important;
 }
 
