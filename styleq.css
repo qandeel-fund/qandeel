@@ -188,7 +188,6 @@ header {
     background: transparent !important;
     box-shadow: none !important;
 }
-
 /* ==========================================
    1. بنر الهيدر (فلات وبدون زوايا دائرية)
    ========================================== */
@@ -213,53 +212,54 @@ header {
    ========================================== */
 .about-section {
     background-color: #faf7f5 !important;
-    padding: 25px 15px;
+    padding: 20px 10px;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* شبكة تحوي مربعين متساويين دائماً */
+/* استخدام Grid لفرض ظهور المربعين بجانب بعض دائماً */
 .vision-mission-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* عمودان متساويان */
+    gap: 10px !important;
 }
 
-/* تنسيق كارت الرسالة / الرؤية */
+/* تنسيق الكروت */
 .ui-card {
     background: #ffffff !important;
-    border-radius: 14px;
-    padding: 18px 16px;
+    border-radius: 12px;
+    padding: 14px 12px !important;
     border: 1px solid #efe8dd;
     border-right: 4px solid #2a5647 !important;
-    box-shadow: 0 4px 15px rgba(42, 86, 71, 0.04) !important;
+    box-shadow: 0 3px 10px rgba(42, 86, 71, 0.04) !important;
     box-sizing: border-box;
+    margin: 0 !important; /* إلغاء الهوامش السفلية التي تبعد الكروت عن بعضها */
 }
 
-/* الترويسة الأفقية (الأيقونة + العنوان) */
+/* الترويسة (الأيقونة والعنوان) */
 .card-header-inline {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 8px;
+    margin-bottom: 8px;
 }
 
 .card-icon-box {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     background-color: rgba(210, 179, 114, 0.15);
     color: #d2b372;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 0.9rem;
     flex-shrink: 0;
 }
 
 .ui-card h3 {
     font-family: 'Cairo', sans-serif;
-    font-size: 1.05rem !important;
+    font-size: 0.98rem !important;
     color: #2a5647 !important;
     font-weight: 700 !important;
     margin: 0 !important;
@@ -267,9 +267,9 @@ header {
 
 .ui-card p {
     font-family: 'Cairo', sans-serif;
-    font-size: 0.85rem !important;
+    font-size: 0.8rem !important;
     color: #4a4a4a !important;
-    line-height: 1.6 !important;
+    line-height: 1.55 !important;
     margin: 0;
     text-align: right;
 }
@@ -279,22 +279,32 @@ header {
 }
 
 /* ==========================================
-   3. التجاوب مع الجوال
+   3. التجاوب مع شاشات الجوال
    ========================================== */
 @media (max-width: 768px) {
     .hero-banner-container {
-        margin: 0 0 16px 0;
+        margin: 0 0 14px 0;
     }
 
-    .about-section {
-        padding: 15px 10px !important;
+    .vision-mission-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
     }
 
     .ui-card {
-        padding: 14px 12px !important;
+        padding: 12px 10px !important;
+    }
+
+    .ui-card h3 {
+        font-size: 0.9rem !important;
+    }
+
+    .ui-card p {
+        font-size: 0.76rem !important;
+        line-height: 1.48 !important;
     }
 }
-
 /* ------------------------------------------
    3. رأس قسم الأهداف والأسهم
    ------------------------------------------ */
