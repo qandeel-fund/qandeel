@@ -170,97 +170,85 @@ header {
     }
 }
 
-/* ==========================================
-   تنسيق البنَر والرسالة والرؤية (حماية فائقة)
-   ========================================== */
-
-/* 1. البنَر الفلات */
-.hero-banner-container {
+/* إلغاء أي خلفيات زيتية سابقة على السيكشن */
+#about-qandeel, 
+.about-section {
+    background-color: #faf7f5 !important;
+    padding: 20px 12px !important;
     width: 100% !important;
-    margin: 0 0 15px 0 !important;
-    padding: 0 !important;
+    box-sizing: border-box !important;
 }
 
-.hero-banner-img {
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    object-fit: cover !important;
-}
-
-/* 2. فرض الشبكة الأفقية للمربعين */
+/* فرض التنسيق الأفقي (مربعين جنب بعض) بنسبة 100% */
 .vision-mission-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* يضمن مساحتين متساويتين تماماً */
+    display: flex !important;
+    flex-direction: row !important; /* يضمن بقائهما أفقياً */
+    justify-content: space-between !important;
     gap: 10px !important;
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
+    background: transparent !important; /* إزالة أي لون زيتي خارجي */
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-/* 3. إلغاء أي سلوك Flex قديم قد يؤثر عليهما */
-.vision-mission-grid .ui-card {
-    width: 100% !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
+/* تنسيق المربعين الداخليين */
+.vision-mission-grid .custom-card {
+    flex: 1 1 50% !important; /* إعطاء كل مربع نصف المساحة تماماً */
+    width: 50% !important;
     background: #ffffff !important;
     border-radius: 12px !important;
     padding: 12px 10px !important;
     border: 1px solid #efe8dd !important;
     border-right: 4px solid #2a5647 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
 }
 
+/* ترتيب الأيقونة والعنوان */
 .card-header-inline {
     display: flex !important;
     align-items: center !important;
     gap: 6px !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 6px !important;
 }
 
 .card-icon-box {
-    width: 30px !important;
-    height: 30px !important;
+    width: 28px !important;
+    height: 28px !important;
     background-color: rgba(210, 179, 114, 0.15) !important;
     color: #d2b372 !important;
     border-radius: 6px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 0.85rem !important;
+    font-size: 0.8rem !important;
     flex-shrink: 0 !important;
 }
 
-.ui-card h3 {
+.vision-mission-grid .custom-card h3 {
     font-family: 'Cairo', sans-serif !important;
-    font-size: 0.9rem !important;
+    font-size: 0.88rem !important;
     color: #2a5647 !important;
     font-weight: 700 !important;
     margin: 0 !important;
-    white-space: nowrap !important; /* يمنع انكسار العنوان */
 }
 
-.ui-card p {
+.vision-mission-grid .custom-card p {
     font-family: 'Cairo', sans-serif !important;
-    font-size: 0.75rem !important;
+    font-size: 0.72rem !important;
     color: #4a4a4a !important;
     line-height: 1.45 !important;
     margin: 0 !important;
     text-align: right !important;
 }
 
-.ui-card p strong {
+.vision-mission-grid .custom-card p strong {
     color: #2a5647 !important;
 }
 
-/* 4. الحفاظ على المربعين مجاورين حتى على الجوال */
-@media (max-width: 768px) {
-    .vision-mission-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 8px !important;
-    }
-}
 /* ------------------------------------------
    3. رأس قسم الأهداف والأسهم
    ------------------------------------------ */
@@ -1045,51 +1033,6 @@ header {
 .stat-item p {
     font-weight: 700;
     color: #666;
-}
-
-/* =======================================================
-   7. قسم من نحن والفوتر الرسمي المطور
-   ======================================================= */
-.about-section {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 60px 0;
-    border-radius: 20px 20px 0 0;
-}
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 55% 40%;
-    gap: 5%;
-    align-items: center;
-}
-
-.about-text h2 {
-    color: var(--accent-color);
-    font-size: 2rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-    text-align: right;
-}
-
-.about-text p {
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: right;
-    line-height: 1.8;
-    opacity: 0.95;
-}
-
-.about-gallery-single {
-    width: 80%;
-    text-align: center;
-}
-
-.combined-gallery-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
 }
 
 footer {
