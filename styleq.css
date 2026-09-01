@@ -190,52 +190,76 @@ header {
 }
 
 /* ==========================================
-   تنسيقات UX/UI الحديثة لبطاقات قنديل
+   1. بنر الهيدر (فلات وبدون زوايا دائرية)
    ========================================== */
+.hero-banner-container {
+    width: 100%;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+.hero-banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0 !important;
+    box-shadow: none;
+    object-fit: cover;
+}
+
+/* ==========================================
+   2. قسم الرسالة والرؤية (مربعين بجانب بعض)
+   ========================================== */
 .about-section {
     background-color: #faf7f5 !important;
-    padding: 40px 15px;
+    padding: 25px 15px;
     width: 100%;
+    box-sizing: border-box;
 }
 
-/* الكارت الأساسي بتصميم مريح */
+/* شبكة تحوي مربعين متساويين دائماً */
+.vision-mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* تنسيق كارت الرسالة / الرؤية */
 .ui-card {
     background: #ffffff !important;
-    border-radius: 16px;
-    padding: 22px 20px;
+    border-radius: 14px;
+    padding: 18px 16px;
     border: 1px solid #efe8dd;
-    border-right: 5px solid #2a5647 !important; /* لمسة جانبية تمنح الكارت هوية */
-    box-shadow: 0 4px 20px rgba(42, 86, 71, 0.04) !important;
-    margin-bottom: 20px;
+    border-right: 4px solid #2a5647 !important;
+    box-shadow: 0 4px 15px rgba(42, 86, 71, 0.04) !important;
     box-sizing: border-box;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ترويسة الكارت (الأيقونة + العنوان في خط واحد) */
+/* الترويسة الأفقية (الأيقونة + العنوان) */
 .card-header-inline {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .card-icon-box {
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
     background-color: rgba(210, 179, 114, 0.15);
     color: #d2b372;
-    border-radius: 10px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     flex-shrink: 0;
 }
 
 .ui-card h3 {
     font-family: 'Cairo', sans-serif;
-    font-size: 1.25rem !important;
+    font-size: 1.05rem !important;
     color: #2a5647 !important;
     font-weight: 700 !important;
     margin: 0 !important;
@@ -243,86 +267,34 @@ header {
 
 .ui-card p {
     font-family: 'Cairo', sans-serif;
-    font-size: 0.92rem !important;
+    font-size: 0.85rem !important;
     color: #4a4a4a !important;
-    line-height: 1.75 !important;
+    line-height: 1.6 !important;
     margin: 0;
     text-align: right;
 }
 
 .ui-card p strong {
     color: #2a5647;
-    font-weight: 700;
-}
-
-/* شبكة الكروت (تكون بجانب بعضها في الشاشات الكبيرة وعمودية في الجوال) */
-.vision-mission-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
 }
 
 /* ==========================================
-   التجاوب الخاص بالجوال
+   3. التجاوب مع الجوال
    ========================================== */
 @media (max-width: 768px) {
+    .hero-banner-container {
+        margin: 0 0 16px 0;
+    }
+
     .about-section {
-        padding: 20px 12px !important;
+        padding: 15px 10px !important;
     }
 
     .ui-card {
-        padding: 18px 16px !important;
-        margin-bottom: 14px !important;
-        border-radius: 14px;
-    }
-
-    .card-icon-box {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
-    }
-
-    .ui-card h3 {
-        font-size: 1.1rem !important;
-    }
-
-    .ui-card p {
-        font-size: 0.88rem !important;
-        line-height: 1.65 !important;
-    }
-
-    .vision-mission-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 14px !important;
-    }
-/* المربع الخارجي بحجم موحد مع باقي الأيقونات */
-.main-card .card-icon-box {
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px; /* مساحة تنفس مريحة للشعار داخل المربع */
-    box-sizing: border-box;
-}
-
-/* الشعار المقصوص ليناسب المربع تماماً */
-.card-icon-box .custom-card-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
-/* التجاوب مع الجوال */
-@media (max-width: 768px) {
-    .main-card .card-icon-box {
-        width: 36px;
-        height: 36px;
-        padding: 6px;
+        padding: 14px 12px !important;
     }
 }
+
 /* ------------------------------------------
    3. رأس قسم الأهداف والأسهم
    ------------------------------------------ */
