@@ -184,7 +184,7 @@
 
         <!-- صندوق عرض رقم الآيبان والنسخ -->
         <div class="iban-display-box">
-            <span id="pageIbanText" class="iban-num">SA83 8000 0513 6080 1607 5277</span>
+            <span id="pageIbanText" class="iban-num">SA58 8000 0513 6080 1130 0126</span>
             <button class="iban-copy-btn" onclick="copyPageIBAN()" id="pageCopyBtn">
                 <i class="fa-regular fa-copy"></i> نسخ الآيبان
             </button>
@@ -223,7 +223,7 @@
 <script>
 function copyPageIBAN() {
     // الرقم المصفى الجاهز للنسخ في حافظة الجهاز الفورية
-    const pureIban = "SA8380000513608016075277";
+    const pureIban = "SA5880000513608011300126";
 
     navigator.clipboard.writeText(pureIban).then(() => {
         const btn = document.getElementById("pageCopyBtn");
