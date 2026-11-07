@@ -236,26 +236,27 @@ header {
 .goals-carousel::-webkit-scrollbar-track {
     background: transparent;
 }
-
+/* إرجاع كروت الأهداف لشكلها السابق تماماً (خلفية شفافة وإطار ذهبي فاخر) */
 .goal-slider-card {
-    min-width: 260px;
-    max-width: 280px;
-    background: transparent !important;
-    border-radius: 18px;
-    padding: 24px 20px;
-    flex-shrink: 0;
-    position: relative;
-    border: 1.5px solid rgba(210, 179, 114, 0.6) !important;
+    min-width: 260px !important;
+    max-width: 280px !important;
+    background: transparent !important; /* إلغاء أي لون خلفية أو تدرج أخضر */
+    background-color: transparent !important;
+    border-radius: 18px !important;
+    padding: 24px 20px !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    border: 1.5px solid rgba(210, 179, 114, 0.6) !important; /* الإطار الذهبي المعتمد */
     box-shadow: 0 6px 18px rgba(210, 179, 114, 0.2) !important;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease !important;
 }
 
 .goal-slider-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) !important;
     border-color: #d2b372 !important;
     box-shadow: 0 8px 25px rgba(210, 179, 114, 0.4) !important;
+    background: transparent !important; /* ضمان بقائها شفافة حتى عند تمرير الماوس */
 }
-
 .goal-num {
     font-family: 'Cairo', sans-serif;
     font-weight: 900;
