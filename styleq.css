@@ -753,18 +753,17 @@ header {
     text-align: center;
 }
 /* =======================================================
-   التعديل النهائي للـ Dashboard (الحصالة يمين، الكروت يسار، واتجاه عربي صحيح)
+   التعديل النهائي والمنضبط للـ Dashboard (الحصالة يمين، الكروت يسار)
    ======================================================= */
 .dashboard-section {
     padding: 40px 15px !important;
     background-color: #faf7f5 !important;
-    direction: rtl !important; /* ضمان الاتجاه العربي العام */
 }
 
-/* ترتيب الأعمدة: الحصالة يمين (الأول) والكروت يسار (الثاني) */
+/* شبكة متساوية: الحصالة باليمين والكروت باليسار تلقائياً بحكم ترتيب الـ HTML */
 .dashboard-grid {
     display: grid !important;
-    grid-template-columns: 1fr 1fr !important; /* نصفين متساويين */
+    grid-template-columns: 1fr 1fr !important;
     gap: 30px !important;
     align-items: start !important;
     max-width: 1250px !important;
@@ -772,7 +771,7 @@ header {
     box-sizing: border-box !important;
 }
 
-/* 1. بوكس الحصالة (جهة اليمين) */
+/* 1. بوكس الحصالة (يأخذ الجهة اليمنى طبيعياً) */
 .right-column-box {
     background-color: #ffffff !important;
     padding: 30px 25px !important;
@@ -781,19 +780,17 @@ header {
     border-top: 5px solid #2a5647 !important;
     text-align: center !important;
     box-sizing: border-box !important;
-    order: 1 !important; /* لضمان ظهور الحصالة يمين في اللابتوب */
 }
 
-/* 2. عمود الكروت (جهة اليسار) */
+/* 2. عمود الكروت (يأخذ الجهة اليسرى) */
 .hero-info-side {
     display: flex !important;
     flex-direction: column !important;
     gap: 20px !important;
     box-sizing: border-box !important;
-    order: 2 !important; /* لضمان ظهور الكروت يسار في اللابتوب */
 }
 
-/* تنسيق كروت الرسالة والرؤية (الاتجاه الصحيح: الأيقونة يمين ثم الكلمة) */
+/* تنسيق كروت الرسالة والرؤية البيضاء */
 .hero-info-side .white-card {
     background: #ffffff !important;
     border-radius: 14px !important;
@@ -805,14 +802,14 @@ header {
     text-align: right !important;
 }
 
-/* إرجاع الترويسة لتبدأ من اليمين: الأيقونة أولاً ثم العنوان */
+/* تصحيح اتجاه ترويسة الكارت: الأيقونة يمين والنص بعدها لليسار */
 .hero-info-side .card-header-inline {
     display: flex !important;
     align-items: center !important;
     gap: 12px !important;
     margin-bottom: 12px !important;
-    flex-direction: row !important; /* الأيقونة يمين والنص بعدها */
-    justify-content: flex-start !important;
+    flex-direction: row-reverse !important; /* يعيد الأيقونة لليمين والنص بجانبها بالترتيب العربي الصحيح */
+    justify-content: flex-end !important;
 }
 
 .hero-info-side .card-icon-box {
@@ -850,20 +847,12 @@ header {
     color: #2a5647 !important;
 }
 
-/* التجاوب مع الجوال (تحويلها لعمود واحد فوق بعض وترتيبها بشكل طبيعي) */
+/* التجاوب مع الجوال والشاشات الصغيرة (تتحول العناصر لعمود واحد فوق بعض) */
 @media (max-width: 992px) {
     .dashboard-grid {
         grid-template-columns: 1fr !important;
         gap: 20px !important;
         padding: 0 10px !important;
-    }
-    
-    .right-column-box {
-        order: 1 !important;
-    }
-    
-    .hero-info-side {
-        order: 2 !important;
     }
 }
 
