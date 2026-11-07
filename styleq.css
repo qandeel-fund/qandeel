@@ -169,88 +169,6 @@ header {
         width: 80% !important; /* يأخذ مساحة مناسبة ومريحة للضغط بالإصبع على الجوال */
     }
 }
-/* ==========================================
-   إلغاء الخلفية الزيتية وفرض الكروت البيضاء أفقياً
-   ========================================== */
-
-/* السيكشن الخارجي باللون البيج الفاتح بدون أي خلفية زيتية */
-.clean-about-section,
-#about-qandeel {
-    background-color: #faf7f5 !important;
-    background: #faf7f5 !important;
-    padding: 20px 10px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-}
-
-/* الحاوية الأفقية للمربعين */
-.side-by-side-wrapper {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important; /* فرض عمودين أفقياً */
-    gap: 10px !important;
-    width: 100% !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-}
-
-/* المربع الأبيض */
-.side-by-side-wrapper .white-card {
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    border-radius: 12px !important;
-    padding: 12px 10px !important;
-    border: 1px solid #efe8dd !important;
-    border-right: 4px solid #2a5647 !important; /* الخط الزيتي الجانبي فقط */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04) !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    width: 100% !important;
-}
-
-/* الترويسة والأيقونة والعنوان */
-.side-by-side-wrapper .card-header-inline {
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    margin-bottom: 6px !important;
-}
-
-.side-by-side-wrapper .card-icon-box {
-    width: 28px !important;
-    height: 28px !important;
-    background-color: rgba(210, 179, 114, 0.18) !important;
-    color: #d2b372 !important;
-    border-radius: 6px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 0.8rem !important;
-    flex-shrink: 0 !important;
-}
-
-.side-by-side-wrapper .white-card h3 {
-    font-family: 'Cairo', sans-serif !important;
-    font-size: 0.88rem !important;
-    color: #2a5647 !important;
-    font-weight: 700 !important;
-    margin: 0 !important;
-}
-
-.side-by-side-wrapper .white-card p {
-    font-family: 'Cairo', sans-serif !important;
-    font-size: 0.72rem !important;
-    color: #4a4a4a !important;
-    line-height: 1.45 !important;
-    margin: 0 !important;
-    text-align: right !important;
-}
-
-.side-by-side-wrapper .white-card p strong {
-    color: #2a5647 !important;
-}
-
 /* ------------------------------------------
    3. رأس قسم الأهداف والأسهم
    ------------------------------------------ */
@@ -755,138 +673,6 @@ header {
     color: var(--primary-color);
 }
 /* =======================================================
-   4. لوحة التحكم الإحصائية والتصميم المزدوج (مضبوط بالكامل)
-   ======================================================= */
-.dashboard-section {
-    padding: 40px 20px;
-    background-color: #faf7f5;
-    box-sizing: border-box;
-}
-
-/* توزيع الشبكة مع مسافات (Margins/Gaps) مريحة للعين */
-.dashboard-grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important; /* عمودان متساويان للحصالة والكروت */
-    gap: 30px !important;
-    align-items: start !important;
-    max-width: 1250px !important;
-    margin: 0 auto !important;
-    box-sizing: border-box !important;
-}
-
-/* بوكس الحصالة (مع ضبط الهوامش الداخلية والخارجية) */
-.right-column-box {
-    background-color: #ffffff !important;
-    padding: 30px 25px !important;
-    border-radius: 20px !important;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.04) !important;
-    border-top: 5px solid #2a5647 !important;
-    text-align: center;
-    box-sizing: border-box !important;
-}
-
-.section-title-box h2 {
-    color: #2a5647;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    font-weight: 700;
-}
-
-.section-title-box p {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-}
-
-.money-box-img-container {
-    margin: 15px 0;
-}
-
-.money-box-large-img {
-    max-width: 45%;
-    height: auto;
-    animation: pulse 2.5s infinite alternate;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.04); }
-}
-
-/* عمود الكروت الجانبي (الرسالة والرؤية) */
-.hero-info-side {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px !important;
-    box-sizing: border-box !important;
-}
-
-/* تنسيق كروت الرسالة والرؤية البيضاء بكل تفاصيلها الجمالية */
-.hero-info-side .white-card {
-    background: #ffffff !important;
-    border-radius: 14px !important;
-    padding: 20px 18px !important;
-    border: 1px solid #efe8dd !important;
-    border-right: 5px solid #2a5647 !important;
-    box-shadow: 0 4px 15px rgba(42, 86, 71, 0.04) !important;
-    box-sizing: border-box !important;
-    text-align: right !important;
-}
-
-.hero-info-side .card-header-inline {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    margin-bottom: 10px !important;
-    flex-direction: row-reverse !important; /* لضبط اتجاه الأيقونة والعنوان */
-    justify-content: flex-start !important;
-}
-
-.hero-info-side .card-icon-box {
-    width: 36px !important;
-    height: 36px !important;
-    background-color: rgba(210, 179, 114, 0.18) !important;
-    color: #d2b372 !important;
-    border-radius: 8px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 1rem !important;
-    flex-shrink: 0 !important;
-}
-
-.hero-info-side h3 {
-    font-family: 'Cairo', sans-serif !important;
-    font-size: 1.1rem !important;
-    color: #2a5647 !important;
-    font-weight: 700 !important;
-    margin: 0 !important;
-}
-
-.hero-info-side p {
-    font-family: 'Cairo', sans-serif !important;
-    font-size: 0.88rem !important;
-    color: #4a4a4a !important;
-    line-height: 1.65 !important;
-    margin: 0 !important;
-    text-align: right !important;
-}
-
-.hero-info-side p strong {
-    color: #2a5647 !important;
-}
-
-/* ==========================================
-   التجاوب مع الجوال (تتحول العناصر لعمود واحد مرتب)
-   ========================================== */
-@media (max-width: 992px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-        padding: 0 10px !important;
-    }
-}
-/* =======================================================
    5. بوكس العداد ودليل ألوان العوائل الجديد
    ======================================================= */
 .progress-container-box {
@@ -965,6 +751,106 @@ header {
     font-weight: 700;
     margin-top: 15px;
     text-align: center;
+}
+/* =======================================================
+   التصميم الجديد والمزدوج: الحصالة وكروت الرسالة والرؤية جنباً إلى جنب
+   ======================================================= */
+.dashboard-section {
+    padding: 40px 15px !important;
+    background-color: #faf7f5 !important;
+}
+
+.dashboard-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* نصفين متساويين تماماً للابتوب */
+    gap: 30px !important;
+    align-items: start !important;
+    max-width: 1250px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+}
+
+/* بوكس الحصالة */
+.right-column-box {
+    background-color: #ffffff !important;
+    padding: 30px 25px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04) !important;
+    border-top: 5px solid #2a5647 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+/* عمود الكروت (الرسالة والرؤية) بجانب الحصالة */
+.hero-info-side {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* تنسيق كروت الرسالة والرؤية البيضاء بإطار زيتي جانبي */
+.hero-info-side .white-card {
+    background: #ffffff !important;
+    border-radius: 14px !important;
+    padding: 22px 20px !important;
+    border: 1px solid #efe8dd !important;
+    border-right: 5px solid #2a5647 !important;
+    box-shadow: 0 4px 15px rgba(42, 86, 71, 0.04) !important;
+    box-sizing: border-box !important;
+    text-align: right !important;
+}
+
+.hero-info-side .card-header-inline {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+    flex-direction: row-reverse !important;
+    justify-content: flex-start !important;
+}
+
+.hero-info-side .card-icon-box {
+    width: 38px !important;
+    height: 38px !important;
+    background-color: rgba(210, 179, 114, 0.18) !important;
+    color: #d2b372 !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1rem !important;
+    flex-shrink: 0 !important;
+}
+
+.hero-info-side h3 {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 1.1rem !important;
+    color: #2a5647 !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+.hero-info-side p {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.88rem !important;
+    color: #4a4a4a !important;
+    line-height: 1.65 !important;
+    margin: 0 !important;
+    text-align: right !important;
+}
+
+.hero-info-side p strong {
+    color: #2a5647 !important;
+}
+
+/* التجاوب مع الجوال والشاشات الصغيرة: تصبح العناصر تحت بعضها بعرض كامل */
+@media (max-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 0 10px !important;
+    }
 }
 
 /* =======================================================
