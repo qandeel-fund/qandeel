@@ -754,24 +754,27 @@ header {
     background-color: var(--accent-color);
     color: var(--primary-color);
 }
-
 /* =======================================================
-   4. لوحة التحكم الإحصائية (Dashboard Section)
+   4. لوحة التحكم الإحصائية والتصميم المزدوج (Dashboard Section)
    ======================================================= */
 .dashboard-section {
     padding: 40px 0;
+    background-color: #faf7f5;
 }
 
+/* توزيع الشبكة بحيث تأخذ الحصالة نصف الشاشة والكروت النصف الآخر على اللابتوب */
 .dashboard-grid {
-    display: grid;
-    grid-template-columns: 35% 62%;
-    gap: 3%;
-    align-items: start;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* عمودان متساويان تماماً */
+    gap: 25px !important;
+    align-items: start !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .section-title-box h2 {
     color: var(--primary-color);
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: 5px;
     font-weight: 700;
 }
@@ -793,19 +796,20 @@ header {
 /* بوكس الحصالة */
 .right-column-box {
     background-color: var(--white);
-    padding: 30px 20px;
+    padding: 25px 20px;
     border-radius: 20px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.04);
     border-top: 5px solid var(--accent-color);
     text-align: center;
+    box-sizing: border-box;
 }
 
 .money-box-img-container {
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .money-box-large-img {
-    max-width: 43%;
+    max-width: 45%;
     height: auto;
     animation: pulse 2.5s infinite alternate;
 }
@@ -813,6 +817,24 @@ header {
 @keyframes pulse {
     0% { transform: scale(1); }
     100% { transform: scale(1.04); }
+}
+
+/* تنسيق عمود الكروت الجانبي ليتناغم مع بوكس الحصالة */
+.hero-info-side {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* ==========================================
+   التجاوب مع شاشات الجوال (تحويلها لعمود واحد)
+   ========================================== */
+@media (max-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr !important; /* العناصر تحت بعضها في الجوال */
+        gap: 20px !important;
+    }
 }
 
 /* =======================================================
