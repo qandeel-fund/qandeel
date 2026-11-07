@@ -755,53 +755,47 @@ header {
     color: var(--primary-color);
 }
 /* =======================================================
-   4. لوحة التحكم الإحصائية والتصميم المزدوج (Dashboard Section)
+   4. لوحة التحكم الإحصائية والتصميم المزدوج (مضبوط بالكامل)
    ======================================================= */
 .dashboard-section {
-    padding: 40px 0;
+    padding: 40px 20px;
     background-color: #faf7f5;
+    box-sizing: border-box;
 }
 
-/* توزيع الشبكة بحيث تأخذ الحصالة نصف الشاشة والكروت النصف الآخر على اللابتوب */
+/* توزيع الشبكة مع مسافات (Margins/Gaps) مريحة للعين */
 .dashboard-grid {
     display: grid !important;
-    grid-template-columns: 1fr 1fr !important; /* عمودان متساويان تماماً */
-    gap: 25px !important;
+    grid-template-columns: 1fr 1fr !important; /* عمودان متساويان للحصالة والكروت */
+    gap: 30px !important;
     align-items: start !important;
-    width: 100% !important;
+    max-width: 1250px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+}
+
+/* بوكس الحصالة (مع ضبط الهوامش الداخلية والخارجية) */
+.right-column-box {
+    background-color: #ffffff !important;
+    padding: 30px 25px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04) !important;
+    border-top: 5px solid #2a5647 !important;
+    text-align: center;
     box-sizing: border-box !important;
 }
 
 .section-title-box h2 {
-    color: var(--primary-color);
-    font-size: 1.6rem;
+    color: #2a5647;
+    font-size: 1.5rem;
     margin-bottom: 5px;
     font-weight: 700;
 }
 
-.stat-icon .quran-custom-icon {
-    width: 55px;
-    height: 60px;
-    object-fit: contain;
-    display: inline-block;
-    vertical-align: middle;
-}
-
 .section-title-box p {
     color: #666;
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-}
-
-/* بوكس الحصالة */
-.right-column-box {
-    background-color: var(--white);
-    padding: 25px 20px;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
-    border-top: 5px solid var(--accent-color);
-    text-align: center;
-    box-sizing: border-box;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
 }
 
 .money-box-img-container {
@@ -819,7 +813,7 @@ header {
     100% { transform: scale(1.04); }
 }
 
-/* تنسيق عمود الكروت الجانبي ليتناغم مع بوكس الحصالة */
+/* عمود الكروت الجانبي (الرسالة والرؤية) */
 .hero-info-side {
     display: flex !important;
     flex-direction: column !important;
@@ -827,16 +821,71 @@ header {
     box-sizing: border-box !important;
 }
 
+/* تنسيق كروت الرسالة والرؤية البيضاء بكل تفاصيلها الجمالية */
+.hero-info-side .white-card {
+    background: #ffffff !important;
+    border-radius: 14px !important;
+    padding: 20px 18px !important;
+    border: 1px solid #efe8dd !important;
+    border-right: 5px solid #2a5647 !important;
+    box-shadow: 0 4px 15px rgba(42, 86, 71, 0.04) !important;
+    box-sizing: border-box !important;
+    text-align: right !important;
+}
+
+.hero-info-side .card-header-inline {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-bottom: 10px !important;
+    flex-direction: row-reverse !important; /* لضبط اتجاه الأيقونة والعنوان */
+    justify-content: flex-start !important;
+}
+
+.hero-info-side .card-icon-box {
+    width: 36px !important;
+    height: 36px !important;
+    background-color: rgba(210, 179, 114, 0.18) !important;
+    color: #d2b372 !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1rem !important;
+    flex-shrink: 0 !important;
+}
+
+.hero-info-side h3 {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 1.1rem !important;
+    color: #2a5647 !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+.hero-info-side p {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.88rem !important;
+    color: #4a4a4a !important;
+    line-height: 1.65 !important;
+    margin: 0 !important;
+    text-align: right !important;
+}
+
+.hero-info-side p strong {
+    color: #2a5647 !important;
+}
+
 /* ==========================================
-   التجاوب مع شاشات الجوال (تحويلها لعمود واحد)
+   التجاوب مع الجوال (تتحول العناصر لعمود واحد مرتب)
    ========================================== */
 @media (max-width: 992px) {
     .dashboard-grid {
-        grid-template-columns: 1fr !important; /* العناصر تحت بعضها في الجوال */
+        grid-template-columns: 1fr !important;
         gap: 20px !important;
+        padding: 0 10px !important;
     }
 }
-
 /* =======================================================
    5. بوكس العداد ودليل ألوان العوائل الجديد
    ======================================================= */
