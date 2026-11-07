@@ -753,16 +753,18 @@ header {
     text-align: center;
 }
 /* =======================================================
-   التصميم الجديد والمزدوج: الحصالة وكروت الرسالة والرؤية جنباً إلى جنب
+   التعديل النهائي للـ Dashboard (الحصالة يمين، الكروت يسار، واتجاه عربي صحيح)
    ======================================================= */
 .dashboard-section {
     padding: 40px 15px !important;
     background-color: #faf7f5 !important;
+    direction: rtl !important; /* ضمان الاتجاه العربي العام */
 }
 
+/* ترتيب الأعمدة: الحصالة يمين (الأول) والكروت يسار (الثاني) */
 .dashboard-grid {
     display: grid !important;
-    grid-template-columns: 1fr 1fr !important; /* نصفين متساويين تماماً للابتوب */
+    grid-template-columns: 1fr 1fr !important; /* نصفين متساويين */
     gap: 30px !important;
     align-items: start !important;
     max-width: 1250px !important;
@@ -770,7 +772,7 @@ header {
     box-sizing: border-box !important;
 }
 
-/* بوكس الحصالة */
+/* 1. بوكس الحصالة (جهة اليمين) */
 .right-column-box {
     background-color: #ffffff !important;
     padding: 30px 25px !important;
@@ -779,17 +781,19 @@ header {
     border-top: 5px solid #2a5647 !important;
     text-align: center !important;
     box-sizing: border-box !important;
+    order: 1 !important; /* لضمان ظهور الحصالة يمين في اللابتوب */
 }
 
-/* عمود الكروت (الرسالة والرؤية) بجانب الحصالة */
+/* 2. عمود الكروت (جهة اليسار) */
 .hero-info-side {
     display: flex !important;
     flex-direction: column !important;
     gap: 20px !important;
     box-sizing: border-box !important;
+    order: 2 !important; /* لضمان ظهور الكروت يسار في اللابتوب */
 }
 
-/* تنسيق كروت الرسالة والرؤية البيضاء بإطار زيتي جانبي */
+/* تنسيق كروت الرسالة والرؤية (الاتجاه الصحيح: الأيقونة يمين ثم الكلمة) */
 .hero-info-side .white-card {
     background: #ffffff !important;
     border-radius: 14px !important;
@@ -801,12 +805,13 @@ header {
     text-align: right !important;
 }
 
+/* إرجاع الترويسة لتبدأ من اليمين: الأيقونة أولاً ثم العنوان */
 .hero-info-side .card-header-inline {
     display: flex !important;
     align-items: center !important;
     gap: 12px !important;
     margin-bottom: 12px !important;
-    flex-direction: row-reverse !important;
+    flex-direction: row !important; /* الأيقونة يمين والنص بعدها */
     justify-content: flex-start !important;
 }
 
@@ -829,6 +834,7 @@ header {
     color: #2a5647 !important;
     font-weight: 700 !important;
     margin: 0 !important;
+    text-align: right !important;
 }
 
 .hero-info-side p {
@@ -844,12 +850,20 @@ header {
     color: #2a5647 !important;
 }
 
-/* التجاوب مع الجوال والشاشات الصغيرة: تصبح العناصر تحت بعضها بعرض كامل */
+/* التجاوب مع الجوال (تحويلها لعمود واحد فوق بعض وترتيبها بشكل طبيعي) */
 @media (max-width: 992px) {
     .dashboard-grid {
         grid-template-columns: 1fr !important;
         gap: 20px !important;
         padding: 0 10px !important;
+    }
+    
+    .right-column-box {
+        order: 1 !important;
+    }
+    
+    .hero-info-side {
+        order: 2 !important;
     }
 }
 
