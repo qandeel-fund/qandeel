@@ -831,15 +831,16 @@ header {
     text-align: right !important;
 }
 
+/* ضبط الترويسة لتصبح الأيقونة يمين والعنوان بعدها مباشرة باتجاه اليمين */
 .hero-info-side .card-header-inline {
     display: flex !important;
     align-items: center !important;
     gap: 12px !important;
     margin-bottom: 12px !important;
-    flex-direction: row-reverse !important;
-    justify-content: flex-end !important;
+    flex-direction: row !important; /* الأيقونة أولاً من جهة اليمين */
+    justify-content: flex-start !important; /* البدء من اليمين تماماً */
+    width: 100% !important;
 }
-
 .hero-info-side .card-icon-box {
     width: 36px !important;
     height: 36px !important;
