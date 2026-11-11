@@ -78,13 +78,18 @@ header {
     padding: 15px 0 10px 0;
 }
 
-/* حاوية الهيدر ترتب الأسطر الثلاثة عمودياً وتحاذيها في الوسط */
+/* حاوية الهيدر */
 .navbar {
     display: flex;
     flex-direction: column;
-    align-items: center; /* توسيط كل شيء */
+    align-items: center;
     gap: 12px;
     width: 100%;
+    background-color: #ffffff; /* تعيين خلفية بيضاء لتفادي الشفافية والتداخل */
+    padding: 15px 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* ظل خفيف وجميل للفصل عن المحتوى */
+    position: relative; /* أو sticky إذا أردتِ تثبيته أثناء التمرير */
+    z-index: 100;
 }
 
 /* السطر الأول: الشعار في المنتصف */
@@ -95,7 +100,7 @@ header {
 }
 
 .nav-logo {
-    height: 55px; /* حجم مناسب للشعار */
+    height: 55px;
     width: auto;
     object-fit: contain;
 }
@@ -105,16 +110,18 @@ header {
     display: flex;
     justify-content: center;
     width: 100%;
+    flex-wrap: wrap; /* للسماح للروابط بالنزول لسطر جديد إذا كانت الشاشة صغيرة جداً */
 }
 
 .nav-links {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
+    flex-wrap: wrap;
 }
 
 .nav-links li a {
